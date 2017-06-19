@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -38,18 +38,18 @@ open class Button: UIButton, Pulseable, PulseableLayer {
      allows the dropshadow effect on the backing layer, while clipping
      the image to a desired shape within the visualLayer.
      */
-	open let visualLayer = CAShapeLayer()
+    @objc open let visualLayer = CAShapeLayer()
 
     /// A Pulse reference.
     internal var pulse: Pulse!
     
     /// A reference to the pulse layer.
-    internal var pulseLayer: CALayer? {
+    @objc internal var pulseLayer: CALayer? {
         return pulse.pulseLayer
     }
     
     /// PulseAnimation value.
-    open var pulseAnimation: PulseAnimation {
+    @objc open var pulseAnimation: PulseAnimation {
         get {
             return pulse.animation
         }
@@ -80,20 +80,20 @@ open class Button: UIButton, Pulseable, PulseableLayer {
         }
     }
     
-	/// A property that accesses the backing layer's background
-	@IBInspectable
+    /// A property that accesses the backing layer's background
+    @IBInspectable
     open override var backgroundColor: UIColor? {
-		didSet {
-			layer.backgroundColor = backgroundColor?.cgColor
-		}
-	}
-	
-	/// A preset property for updated contentEdgeInsets.
-	open var contentEdgeInsetsPreset = EdgeInsetsPreset.none {
-		didSet {
-			contentEdgeInsets = EdgeInsetsPresetToValue(preset: contentEdgeInsetsPreset)
-		}
-	}
+        didSet {
+            layer.backgroundColor = backgroundColor?.cgColor
+        }
+    }
+    
+    /// A preset property for updated contentEdgeInsets.
+    @objc open var contentEdgeInsetsPreset = EdgeInsetsPreset.none {
+        didSet {
+            contentEdgeInsets = EdgeInsetsPresetToValue(preset: contentEdgeInsetsPreset)
+        }
+    }
     
     /// Sets the normal and highlighted image for the button.
     @IBInspectable
@@ -132,38 +132,38 @@ open class Button: UIButton, Pulseable, PulseableLayer {
         }
     }
     
-	/**
+    /**
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		prepare()
-	}
-	
-	/**
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepare()
+    }
+    
+    /**
      An initializer that initializes the object with a CGRect object.
      If AutoLayout is used, it is better to initilize the instance
      using the init() initializer.
      - Parameter frame: A CGRect instance.
      */
-	public override init(frame: CGRect) {
-		super.init(frame: frame)
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
         tintColor = Color.blue.base
-		prepare()
-	}
-	
-	/// A convenience initializer.
-	public convenience init() {
-		self.init(frame: .zero)
-	}
+        prepare()
+    }
+    
+    /// A convenience initializer.
+    public convenience init() {
+        self.init(frame: .zero)
+    }
     
     /**
      A convenience initializer that acceps an image and tint
      - Parameter image: A UIImage.
      - Parameter tintColor: A UI
      */
-    public convenience init(image: UIImage?, tintColor: UIColor = Color.blue.base) {
+    @objc public convenience init(image: UIImage?, tintColor: UIColor = Color.blue.base) {
         self.init()
         prepare(with: image, tintColor: tintColor)
         prepare()
@@ -174,19 +174,19 @@ open class Button: UIButton, Pulseable, PulseableLayer {
      - Parameter title: A String.
      - Parameter titleColor: A UI
      */
-    public convenience init(title: String?, titleColor: UIColor = Color.blue.base) {
+    @objc public convenience init(title: String?, titleColor: UIColor = Color.blue.base) {
         self.init()
         prepare(with: title, titleColor: titleColor)
         prepare()
     }
-	
+    
     open override func layoutSubviews() {
         super.layoutSubviews()
         layoutShape()
         layoutVisualLayer()
         layoutShadowPath()
     }
-	
+    
     /**
      Triggers the pulse animation.
      - Parameter point: A Optional point to pulse from, otherwise pulses
@@ -232,7 +232,7 @@ open class Button: UIButton, Pulseable, PulseableLayer {
         pulse.contract()
     }
     
-    open func bringImageViewToFront() {
+    @objc open func bringImageViewToFront() {
         guard let v = imageView else {
             return
         }
@@ -240,18 +240,18 @@ open class Button: UIButton, Pulseable, PulseableLayer {
         bringSubview(toFront: v)
     }
     
-	/**
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
+    @objc open func prepare() {
         contentScaleFactor = Screen.scale
         prepareVisualLayer()
         preparePulse()
-	}
+    }
 }
 
 extension Button {

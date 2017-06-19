@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,71 +32,71 @@ import UIKit
 
 open class NavigationBar: UINavigationBar {
     /// Will layout the view.
-    open var willLayout: Bool {
+    @objc open var willLayout: Bool {
         return 0 < width && 0 < height && nil != superview
     }
     
     open override var intrinsicContentSize: CGSize {
         return CGSize(width: width, height: height)
     }
-	
-	/// A preset wrapper around contentEdgeInsets.
-	open var contentEdgeInsetsPreset = EdgeInsetsPreset.none {
-		didSet {
+    
+    /// A preset wrapper around contentEdgeInsets.
+    @objc open var contentEdgeInsetsPreset = EdgeInsetsPreset.none {
+        didSet {
             contentEdgeInsets = EdgeInsetsPresetToValue(preset: contentEdgeInsetsPreset)
-		}
-	}
-	
-	/// A reference to EdgeInsets.
-	@IBInspectable
+        }
+    }
+    
+    /// A reference to EdgeInsets.
+    @IBInspectable
     open var contentEdgeInsets = EdgeInsets.zero {
-		didSet {
-			layoutSubviews()
-		}
-	}
-	
-	/// A preset wrapper around interimSpace.
-	open var interimSpacePreset = InterimSpacePreset.none {
-		didSet {
+        didSet {
+            layoutSubviews()
+        }
+    }
+    
+    /// A preset wrapper around interimSpace.
+    @objc open var interimSpacePreset = InterimSpacePreset.none {
+        didSet {
             interimSpace = InterimSpacePresetToValue(preset: interimSpacePreset)
-		}
-	}
-	
-	/// A wrapper around grid.interimSpace.
-	@IBInspectable
+        }
+    }
+    
+    /// A wrapper around grid.interimSpace.
+    @IBInspectable
     open var interimSpace: InterimSpace = 0 {
-		didSet {
-			layoutSubviews()
-		}
-	}
-	
-	/// Grid cell factor.
-	@IBInspectable
+        didSet {
+            layoutSubviews()
+        }
+    }
+    
+    /// Grid cell factor.
+    @IBInspectable
     open var gridFactor: CGFloat = 12 {
-		didSet {
-			assert(0 < gridFactor, "[Material Error: gridFactor must be greater than 0.]")
-			layoutSubviews()
-		}
-	}
-	
-	/**
+        didSet {
+            assert(0 < gridFactor, "[Material Error: gridFactor must be greater than 0.]")
+            layoutSubviews()
+        }
+    }
+    
+    /**
      The back button image writes to the backIndicatorImage property and
      backIndicatorTransitionMaskImage property.
      */
-	@IBInspectable
+    @IBInspectable
     open var backButtonImage: UIImage? {
-		get {
-			return backIndicatorImage
-		}
-		set(value) {
-			let image: UIImage? = value
-			backIndicatorImage = image
-			backIndicatorTransitionMaskImage = image
-		}
-	}
-	
-	/// A property that accesses the backing layer's background
-	@IBInspectable
+        get {
+            return backIndicatorImage
+        }
+        set(value) {
+            let image: UIImage? = value
+            backIndicatorImage = image
+            backIndicatorTransitionMaskImage = image
+        }
+    }
+    
+    /// A property that accesses the backing layer's background
+    @IBInspectable
     open override var backgroundColor: UIColor? {
         get {
             return barTintColor
@@ -104,63 +104,63 @@ open class NavigationBar: UINavigationBar {
         set(value) {
             barTintColor = value
         }
-	}
-	
-	/**
+    }
+    
+    /**
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		prepare()
-	}
-	
-	/**
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepare()
+    }
+    
+    /**
      An initializer that initializes the object with a CGRect object.
      If AutoLayout is used, it is better to initilize the instance
      using the init() initializer.
      - Parameter frame: A CGRect instance.
      */
-	public override init(frame: CGRect) {
-		super.init(frame: frame)
-		prepare()
-	}
-	
-	/// A convenience initializer.
-	public convenience init() {
-		self.init(frame: .zero)
-	}
-	
-	open override func sizeThatFits(_ size: CGSize) -> CGSize {
-		return intrinsicContentSize
-	}
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        prepare()
+    }
     
-	open override func layoutSubviews() {
-		super.layoutSubviews()
+    /// A convenience initializer.
+    public convenience init() {
+        self.init(frame: .zero)
+    }
+    
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return intrinsicContentSize
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         layoutShape()
         layoutShadowPath()
-		
+        
         if let v = topItem {
-			layoutNavigationItem(item: v)
-		}
-		
-		if let v = backItem {
-			layoutNavigationItem(item: v)
-		}
+            layoutNavigationItem(item: v)
+        }
+        
+        if let v = backItem {
+            layoutNavigationItem(item: v)
+        }
         
         layoutDivider()
-	}
-	
-	open override func pushItem(_ item: UINavigationItem, animated: Bool) {
-		super.pushItem(item, animated: animated)
-		layoutNavigationItem(item: item)
-	}
-	
-	/**
+    }
+    
+    open override func pushItem(_ item: UINavigationItem, animated: Bool) {
+        super.pushItem(item, animated: animated)
+        layoutNavigationItem(item: item)
+    }
+    
+    /**
      Lays out the UINavigationItem.
      - Parameter item: A UINavigationItem to layout.
      */
-	internal func layoutNavigationItem(item: UINavigationItem) {
+    @objc internal func layoutNavigationItem(item: UINavigationItem) {
         guard willLayout else {
             return
         }
@@ -279,46 +279,46 @@ open class NavigationBar: UINavigationBar {
         } else {
             item.detailLabel.removeFromSuperview()
         }
-	}
-	
-	/**
+    }
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
+    @objc open func prepare() {
         barStyle = .black
         isTranslucent = false
         depthPreset = .depth1
         interimSpacePreset = .interimSpace3
         contentEdgeInsetsPreset = .square1
         contentScaleFactor = Screen.scale
-		backButtonImage = Icon.cm.arrowBack
+        backButtonImage = Icon.cm.arrowBack
         let image = UIImage()
         shadowImage = image
-		setBackgroundImage(image, for: .default)
-		backgroundColor = .white
-	}
-	
-	/**
+        setBackgroundImage(image, for: .default)
+        backgroundColor = .white
+    }
+    
+    /**
      Prepare the item by setting the title property to equal an empty string.
      - Parameter item: A UINavigationItem to layout.
      */
-	private func prepareItem(item: UINavigationItem) {
-		item.hidesBackButton = false
-		item.setHidesBackButton(true, animated: false)
-	}
-	
-	/**
+    private func prepareItem(item: UINavigationItem) {
+        item.hidesBackButton = false
+        item.setHidesBackButton(true, animated: false)
+    }
+    
+    /**
      Prepare the titleView.
      - Parameter item: A UINavigationItem to layout.
      */
-	private func prepareTitleView(item: UINavigationItem) {
+    private func prepareTitleView(item: UINavigationItem) {
         guard nil == item.titleView else {
             return
         }
         item.titleView = UIView(frame: .zero)
-	}
+    }
 }

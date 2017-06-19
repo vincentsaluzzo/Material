@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,26 +36,26 @@ fileprivate var NavigationItemContext: UInt8 = 0
 
 public class NavigationItem: NSObject {
     /// Should center the contentView.
-    open var contentViewAlignment = ContentViewAlignment.center {
+    @objc open var contentViewAlignment = ContentViewAlignment.center {
         didSet {
             navigationBar?.layoutSubviews()
         }
     }
     
-	/// Back Button.
-	public private(set) lazy var backButton: IconButton = IconButton()
-	
-	/// Content View.
-    public private(set) lazy var contentView = UIView()
-	
-	/// Title label.
-	public private(set) lazy var titleLabel = UILabel()
-	
-	/// Detail label.
-	public private(set) lazy var detailLabel = UILabel()
-	
-	/// Left items.
-    public var leftViews = [UIView]() {
+    /// Back Button.
+    @objc public private(set) lazy var backButton: IconButton = IconButton()
+    
+    /// Content View.
+    @objc public private(set) lazy var contentView = UIView()
+    
+    /// Title label.
+    @objc public private(set) lazy var titleLabel = UILabel()
+    
+    /// Detail label.
+    @objc public private(set) lazy var detailLabel = UILabel()
+    
+    /// Left items.
+    @objc public var leftViews = [UIView]() {
         didSet {
             for v in oldValue {
                 v.removeFromSuperview()
@@ -63,9 +63,9 @@ public class NavigationItem: NSObject {
             navigationBar?.layoutSubviews()
         }
     }
-	
-	/// Right items.
-    public var rightViews = [UIView]() {
+    
+    /// Right items.
+    @objc public var rightViews = [UIView]() {
         didSet {
             for v in oldValue {
                 v.removeFromSuperview()
@@ -75,7 +75,7 @@ public class NavigationItem: NSObject {
     }
     
     /// Center items.
-    public var centerViews: [UIView] {
+    @objc public var centerViews: [UIView] {
         get {
             return contentView.grid.views
         }
@@ -83,8 +83,8 @@ public class NavigationItem: NSObject {
             contentView.grid.views = value
         }
     }
-	
-    public var navigationBar: NavigationBar? {
+    
+    @objc public var navigationBar: NavigationBar? {
         return contentView.superview?.superview as? NavigationBar
     }
     
@@ -100,51 +100,51 @@ public class NavigationItem: NSObject {
         removeObserver(self, forKeyPath: "titleLabel.textAlignment")
     }
     
-	/// Initializer.
-	public override init() {
-		super.init()
+    /// Initializer.
+    public override init() {
+        super.init()
         prepareTitleLabel()
-		prepareDetailLabel()
-	}
+        prepareDetailLabel()
+    }
     
     /// Reloads the subviews for the NavigationBar.
-    internal func reload() {
+    @objc internal func reload() {
         navigationBar?.layoutSubviews()
     }
-	
-	/// Prepares the titleLabel.
+    
+    /// Prepares the titleLabel.
     private func prepareTitleLabel() {
         titleLabel.textAlignment = .center
-		titleLabel.contentScaleFactor = Screen.scale
+        titleLabel.contentScaleFactor = Screen.scale
         titleLabel.font = RobotoFont.medium(with: 17)
         titleLabel.textColor = Color.darkText.primary
         addObserver(self, forKeyPath: "titleLabel.textAlignment", options: [], context: &NavigationItemContext)
-	}
-	
-	/// Prepares the detailLabel.
+    }
+    
+    /// Prepares the detailLabel.
     private func prepareDetailLabel() {
         detailLabel.textAlignment = .center
         titleLabel.contentScaleFactor = Screen.scale
-		detailLabel.font = RobotoFont.regular(with: 12)
-		detailLabel.textColor = Color.darkText.secondary
-	}
+        detailLabel.font = RobotoFont.regular(with: 12)
+        detailLabel.textColor = Color.darkText.secondary
+    }
 }
 
 extension UINavigationItem {
-	/// NavigationItem reference.
-	public internal(set) var navigationItem: NavigationItem {
-		get {
-			return AssociatedObject.get(base: self, key: &NavigationItemKey) {
-				return NavigationItem()
-			}
-		}
-		set(value) {
-			AssociatedObject.set(base: self, key: &NavigationItemKey, value: value)
-		}
-	}
+    /// NavigationItem reference.
+    @objc public internal(set) var navigationItem: NavigationItem {
+        get {
+            return AssociatedObject.get(base: self, key: &NavigationItemKey) {
+                return NavigationItem()
+            }
+        }
+        set(value) {
+            AssociatedObject.set(base: self, key: &NavigationItemKey, value: value)
+        }
+    }
     
     /// Should center the contentView.
-    open var contentViewAlignment: ContentViewAlignment {
+    @objc open var contentViewAlignment: ContentViewAlignment {
         get {
             return navigationItem.contentViewAlignment
         }
@@ -152,72 +152,72 @@ extension UINavigationItem {
             navigationItem.contentViewAlignment = value
         }
     }
-	
+    
     /// Content View.
-    open var contentView: UIView {
+    @objc open var contentView: UIView {
         return navigationItem.contentView
     }
     
-	/// Back Button.
-	open var backButton: IconButton {
-		return navigationItem.backButton
-	}
-	
-    /// Title text.
-	@nonobjc
-	open var title: String? {
-		get {
-			return titleLabel.text
-		}
-		set(value) {
-			titleLabel.text = value
-            navigationItem.reload()
-		}
-	}
+    /// Back Button.
+    @objc open var backButton: IconButton {
+        return navigationItem.backButton
+    }
     
-	/// Title Label.
-	open var titleLabel: UILabel {
-		return navigationItem.titleLabel
-	}
-	
-	/// Detail text.
-	open var detail: String? {
-		get {
-			return detailLabel.text
-		}
-		set(value) {
-			detailLabel.text = value
+    /// Title text.
+    @nonobjc
+    open var title: String? {
+        get {
+            return titleLabel.text
+        }
+        set(value) {
+            titleLabel.text = value
             navigationItem.reload()
-		}
-	}
-	
-	/// Detail Label.
-	open var detailLabel: UILabel {
-		return navigationItem.detailLabel
-	}
-	
-	/// Left side UIViews.
-	open var leftViews: [UIView] {
-		get {
-			return navigationItem.leftViews
-		}
-		set(value) {
-			navigationItem.leftViews = value
-		}
-	}
-	
-	/// Right side UIViews.
-	open var rightViews: [UIView] {
-		get {
-			return navigationItem.rightViews
-		}
-		set(value) {
-			navigationItem.rightViews = value
-		}
-	}
+        }
+    }
+    
+    /// Title Label.
+    @objc open var titleLabel: UILabel {
+        return navigationItem.titleLabel
+    }
+    
+    /// Detail text.
+    @objc open var detail: String? {
+        get {
+            return detailLabel.text
+        }
+        set(value) {
+            detailLabel.text = value
+            navigationItem.reload()
+        }
+    }
+    
+    /// Detail Label.
+    @objc open var detailLabel: UILabel {
+        return navigationItem.detailLabel
+    }
+    
+    /// Left side UIViews.
+    @objc open var leftViews: [UIView] {
+        get {
+            return navigationItem.leftViews
+        }
+        set(value) {
+            navigationItem.leftViews = value
+        }
+    }
+    
+    /// Right side UIViews.
+    @objc open var rightViews: [UIView] {
+        get {
+            return navigationItem.rightViews
+        }
+        set(value) {
+            navigationItem.rightViews = value
+        }
+    }
     
     /// Center UIViews.
-    open var centerViews: [UIView] {
+    @objc open var centerViews: [UIView] {
         get {
             return navigationItem.centerViews
         }

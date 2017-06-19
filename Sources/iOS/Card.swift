@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,30 +32,30 @@ import UIKit
 
 open class Card: PulseView {
     /// A container view for subviews.
-    open let container = UIView()
+    @objc open let container = UIView()
     
     @IBInspectable
-    open override var cornerRadiusPreset: CornerRadiusPreset {
+    @objc open override var cornerRadiusPreset: CornerRadiusPreset {
         didSet {
             container.cornerRadiusPreset = cornerRadiusPreset
         }
     }
     
     @IBInspectable
-    open override var cornerRadius: CGFloat {
+    @objc open override var cornerRadius: CGFloat {
         didSet {
             container.cornerRadius = cornerRadius
         }
     }
     
-    open override var shapePreset: ShapePreset {
+    @objc open override var shapePreset: ShapePreset {
         didSet {
             container.shapePreset = shapePreset
         }
     }
     
     @IBInspectable
-    open override var backgroundColor: UIColor? {
+    @objc open override var backgroundColor: UIColor? {
         didSet {
             container.backgroundColor = backgroundColor
         }
@@ -63,7 +63,7 @@ open class Card: PulseView {
     
     /// A reference to the toolbar.
     @IBInspectable
-    open var toolbar: Toolbar? {
+    @objc open var toolbar: Toolbar? {
         didSet {
             oldValue?.removeFromSuperview()
             if let v = toolbar {
@@ -74,7 +74,7 @@ open class Card: PulseView {
     }
     
     /// A preset wrapper around toolbarEdgeInsets.
-    open var toolbarEdgeInsetsPreset = EdgeInsetsPreset.none {
+    @objc open var toolbarEdgeInsetsPreset = EdgeInsetsPreset.none {
         didSet {
             toolbarEdgeInsets = EdgeInsetsPresetToValue(preset: toolbarEdgeInsetsPreset)
         }
@@ -82,7 +82,7 @@ open class Card: PulseView {
     
     /// A reference to toolbarEdgeInsets.
     @IBInspectable
-    open var toolbarEdgeInsets = EdgeInsets.zero {
+    @objc open var toolbarEdgeInsets = EdgeInsets.zero {
         didSet {
             layoutSubviews()
         }
@@ -90,7 +90,7 @@ open class Card: PulseView {
     
     /// A reference to the contentView.
     @IBInspectable
-    open var contentView: UIView? {
+    @objc open var contentView: UIView? {
         didSet {
             oldValue?.removeFromSuperview()
             if let v = contentView {
@@ -102,7 +102,7 @@ open class Card: PulseView {
     }
     
     /// A preset wrapper around contentViewEdgeInsets.
-    open var contentViewEdgeInsetsPreset = EdgeInsetsPreset.none {
+    @objc open var contentViewEdgeInsetsPreset = EdgeInsetsPreset.none {
         didSet {
             contentViewEdgeInsets = EdgeInsetsPresetToValue(preset: contentViewEdgeInsetsPreset)
         }
@@ -110,7 +110,7 @@ open class Card: PulseView {
     
     /// A reference to contentViewEdgeInsets.
     @IBInspectable
-    open var contentViewEdgeInsets = EdgeInsets.zero {
+    @objc open var contentViewEdgeInsets = EdgeInsets.zero {
         didSet {
             layoutSubviews()
         }
@@ -118,7 +118,7 @@ open class Card: PulseView {
     
     /// A reference to the bottomBar.
     @IBInspectable
-    open var bottomBar: Bar? {
+    @objc open var bottomBar: Bar? {
         didSet {
             oldValue?.removeFromSuperview()
             if let v = bottomBar {
@@ -129,7 +129,7 @@ open class Card: PulseView {
     }
     
     /// A preset wrapper around bottomBarEdgeInsets.
-    open var bottomBarEdgeInsetsPreset = EdgeInsetsPreset.none {
+    @objc open var bottomBarEdgeInsetsPreset = EdgeInsetsPreset.none {
         didSet {
             bottomBarEdgeInsets = EdgeInsetsPresetToValue(preset: bottomBarEdgeInsetsPreset)
         }
@@ -137,7 +137,7 @@ open class Card: PulseView {
     
     /// A reference to bottomBarEdgeInsets.
     @IBInspectable
-    open var bottomBarEdgeInsets = EdgeInsets.zero {
+    @objc open var bottomBarEdgeInsets = EdgeInsets.zero {
         didSet {
             layoutSubviews()
         }
@@ -170,7 +170,7 @@ open class Card: PulseView {
      - Parameter contentView: An optional UIView.
      - Parameter bottomBar: An optional Bar.
      */
-    public convenience init?(toolbar: Toolbar?, contentView: UIView?, bottomBar: Bar?) {
+    @objc public convenience init?(toolbar: Toolbar?, contentView: UIView?, bottomBar: Bar?) {
         self.init(frame: .zero)
         prepareProperties(toolbar: toolbar, contentView: contentView, bottomBar: bottomBar)
     }
@@ -182,7 +182,7 @@ open class Card: PulseView {
     }
     
     /// Reloads the layout.
-    open func reload() {
+    @objc open func reload() {
         var h: CGFloat = 0
         
         if let v = toolbar {
@@ -223,7 +223,7 @@ open class Card: PulseView {
      - Parameter from top: A CGFloat.
      - Returns: A CGFloat.
      */
-    @discardableResult
+    @objc @discardableResult
     open func prepare(view: UIView, with insets: EdgeInsets, from top: CGFloat) -> CGFloat {
         let y = insets.top + top
         
@@ -250,7 +250,7 @@ open class Card: PulseView {
      - Parameter contentView: An optional UIView.
      - Parameter bottomBar: An optional Bar.
      */
-    internal func prepareProperties(toolbar: Toolbar?, contentView: UIView?, bottomBar: Bar?) {
+    @objc internal func prepareProperties(toolbar: Toolbar?, contentView: UIView?, bottomBar: Bar?) {
         self.toolbar = toolbar
         self.contentView = contentView
         self.bottomBar = bottomBar

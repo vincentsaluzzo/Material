@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -33,7 +33,7 @@ import UIKit
 extension UIView {
     /// A property that accesses the backing layer's masksToBounds.
     @IBInspectable
-    open var masksToBounds: Bool {
+    @objc open var masksToBounds: Bool {
         get {
             return layer.masksToBounds
         }
@@ -44,7 +44,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's opacity.
     @IBInspectable
-    open var opacity: Float {
+    @objc open var opacity: Float {
         get {
             return layer.opacity
         }
@@ -55,7 +55,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's anchorPoint.
     @IBInspectable
-    open var anchorPoint: CGPoint {
+    @objc open var anchorPoint: CGPoint {
         get {
             return layer.anchorPoint
         }
@@ -66,7 +66,7 @@ extension UIView {
     
     /// A property that accesses the frame.origin.x property.
     @IBInspectable
-    open var x: CGFloat {
+    @objc open var x: CGFloat {
         get {
             return layer.x
         }
@@ -77,7 +77,7 @@ extension UIView {
     
     /// A property that accesses the frame.origin.y property.
     @IBInspectable
-    open var y: CGFloat {
+    @objc open var y: CGFloat {
         get {
             return layer.y
         }
@@ -88,7 +88,7 @@ extension UIView {
     
     /// A property that accesses the frame.size.width property.
     @IBInspectable
-    open var width: CGFloat {
+    @objc open var width: CGFloat {
         get {
             return layer.width
         }
@@ -99,7 +99,7 @@ extension UIView {
     
     /// A property that accesses the frame.size.height property.
     @IBInspectable
-    open var height: CGFloat {
+    @objc open var height: CGFloat {
         get {
             return layer.height
         }
@@ -109,7 +109,7 @@ extension UIView {
     }
     
     /// HeightPreset value.
-    open var heightPreset: HeightPreset {
+    @objc open var heightPreset: HeightPreset {
         get {
             return layer.heightPreset
         }
@@ -123,7 +123,7 @@ extension UIView {
      width or height property is set, the other will be automatically adjusted
      to maintain the shape of the object.
      */
-    open var shapePreset: ShapePreset {
+    @objc open var shapePreset: ShapePreset {
         get {
             return layer.shapePreset
         }
@@ -133,7 +133,7 @@ extension UIView {
     }
     
     /// A preset value for Depth.
-    open var depthPreset: DepthPreset {
+    @objc open var depthPreset: DepthPreset {
         get {
             return layer.depthPreset
         }
@@ -154,7 +154,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's shadow
     @IBInspectable
-    open var shadowColor: UIColor? {
+    @objc open var shadowColor: UIColor? {
         get {
             guard let v = layer.shadowColor else {
                 return nil
@@ -169,7 +169,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's shadowOffset.
     @IBInspectable
-    open var shadowOffset: CGSize {
+    @objc open var shadowOffset: CGSize {
         get {
             return layer.shadowOffset
         }
@@ -180,7 +180,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's shadowOpacity.
     @IBInspectable
-    open var shadowOpacity: Float {
+    @objc open var shadowOpacity: Float {
         get {
             return layer.shadowOpacity
         }
@@ -191,7 +191,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's shadowRadius.
     @IBInspectable
-    open var shadowRadius: CGFloat {
+    @objc open var shadowRadius: CGFloat {
         get {
             return layer.shadowRadius
         }
@@ -202,7 +202,7 @@ extension UIView {
     
     /// A property that accesses the backing layer's shadowPath.
     @IBInspectable
-    open var shadowPath: CGPath? {
+    @objc open var shadowPath: CGPath? {
         get {
             return layer.shadowPath
         }
@@ -213,7 +213,7 @@ extension UIView {
     
     /// Enables automatic shadowPath sizing.
     @IBInspectable
-    open var isShadowPathAutoSizing: Bool {
+    @objc open var isShadowPathAutoSizing: Bool {
         get {
             return layer.isShadowPathAutoSizing
         }
@@ -223,7 +223,7 @@ extension UIView {
     }
     
     /// A property that sets the cornerRadius of the backing layer.
-    open var cornerRadiusPreset: CornerRadiusPreset {
+    @objc open var cornerRadiusPreset: CornerRadiusPreset {
         get {
             return layer.cornerRadiusPreset
         }
@@ -234,7 +234,7 @@ extension UIView {
     
     /// A property that accesses the layer.cornerRadius.
     @IBInspectable
-    open var cornerRadius: CGFloat {
+    @objc open var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -244,7 +244,7 @@ extension UIView {
     }
     
     /// A preset property to set the borderWidth.
-    open var borderWidthPreset: BorderWidthPreset {
+    @objc open var borderWidthPreset: BorderWidthPreset {
         get {
             return layer.borderWidthPreset
         }
@@ -255,7 +255,7 @@ extension UIView {
     
     /// A property that accesses the layer.borderWith.
     @IBInspectable
-    open var borderWidth: CGFloat {
+    @objc open var borderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -266,7 +266,7 @@ extension UIView {
     
     /// A property that accesses the layer.borderColor property.
     @IBInspectable
-    open var borderColor: UIColor? {
+    @objc open var borderColor: UIColor? {
         get {
             guard let v = layer.borderColor else {
                 return nil
@@ -280,7 +280,7 @@ extension UIView {
     
     /// A property that accesses the layer.position property.
     @IBInspectable
-    open var position: CGPoint {
+    @objc open var position: CGPoint {
         get {
             return layer.position
         }
@@ -291,7 +291,7 @@ extension UIView {
     
     /// A property that accesses the layer.zPosition property.
     @IBInspectable
-    open var zPosition: CGFloat {
+    @objc open var zPosition: CGFloat {
         get {
             return layer.zPosition
         }
@@ -301,12 +301,12 @@ extension UIView {
     }
     
     /// Manages the layout for the shape of the view instance.
-    open func layoutShape() {
+    @objc open func layoutShape() {
         layer.layoutShape()
     }
     
     /// Sets the shadow path.
-    open func layoutShadowPath() {
+    @objc open func layoutShadowPath() {
         layer.layoutShadowPath()
     }
 }

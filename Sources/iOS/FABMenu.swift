@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -40,10 +40,10 @@ public enum FABMenuDirection: Int {
 
 open class FABMenuItem: View {
     /// A reference to the titleLabel.
-    open let titleLabel = UILabel()
+    @objc open let titleLabel = UILabel()
     
     /// A reference to the fabButton.
-    open let fabButton = FABButton()
+    @objc open let fabButton = FABButton()
     
     /**
      Prepares the view instance when intialized. When subclassing,
@@ -61,7 +61,7 @@ open class FABMenuItem: View {
     }
     
     /// A reference to the titleLabel text.
-    open var title: String? {
+    @objc open var title: String? {
         get {
             return titleLabel.text
         }
@@ -86,7 +86,7 @@ open class FABMenuItem: View {
 
 extension FABMenuItem {
     /// Shows the titleLabel.
-    open func showTitleLabel() {
+    @objc open func showTitleLabel() {
         let interimSpace = InterimSpacePresetToValue(preset: .interimSpace6)
         
         titleLabel.sizeToFit()
@@ -107,7 +107,7 @@ extension FABMenuItem {
     }
     
     /// Hides the titleLabel.
-    open func hideTitleLabel() {
+    @objc open func hideTitleLabel() {
         titleLabel.isHidden = true
     }
 }
@@ -175,7 +175,7 @@ open class FABMenu: View {
     /// A reference to the SpringAnimation object.
     internal let spring = SpringAnimation()
     
-    open var fabMenuDirection: FABMenuDirection {
+    @objc open var fabMenuDirection: FABMenuDirection {
         get {
             switch spring.springDirection {
             case .up:
@@ -205,7 +205,7 @@ open class FABMenu: View {
     }
     
     /// A reference to the base FABButton.
-    open var fabButton: FABButton? {
+    @objc open var fabButton: FABButton? {
         didSet {
             oldValue?.removeFromSuperview()
             
@@ -219,19 +219,19 @@ open class FABMenu: View {
     }
     
     /// An internal handler for the FABButton.
-    internal var handleFABButtonCallback: ((UIButton) -> Void)?
+    @objc internal var handleFABButtonCallback: ((UIButton) -> Void)?
     
     /// An internal handler for the open function.
-    internal var handleOpenCallback: (() -> Void)?
+    @objc internal var handleOpenCallback: (() -> Void)?
     
     /// An internal handler for the close function.
-    internal var handleCloseCallback: (() -> Void)?
+    @objc internal var handleCloseCallback: (() -> Void)?
     
     /// An internal handler for the completion function.
-    internal var handleCompletionCallback: ((UIView) -> Void)?
+    @objc internal var handleCompletionCallback: ((UIView) -> Void)?
     
     /// Size of FABMenuItems.
-    open var fabMenuItemSize: CGSize {
+    @objc open var fabMenuItemSize: CGSize {
         get {
             return spring.itemSize
         }
@@ -241,7 +241,7 @@ open class FABMenu: View {
     }
     
     /// A preset wrapper around interimSpace.
-    open var interimSpacePreset: InterimSpacePreset {
+    @objc open var interimSpacePreset: InterimSpacePreset {
         get {
             return spring.interimSpacePreset
         }
@@ -251,7 +251,7 @@ open class FABMenu: View {
     }
     
     /// The space between views.
-    open var interimSpace: InterimSpace {
+    @objc open var interimSpace: InterimSpace {
         get {
             return spring.interimSpace
         }
@@ -261,7 +261,7 @@ open class FABMenu: View {
     }
     
     /// A boolean indicating if the menu is open or not.
-    open var isOpened: Bool {
+    @objc open var isOpened: Bool {
         get {
             return spring.isOpened
         }
@@ -271,7 +271,7 @@ open class FABMenu: View {
     }
     
     /// A boolean indicating if the menu is enabled.
-    open var isEnabled: Bool {
+    @objc open var isEnabled: Bool {
         get {
             return spring.isEnabled
         }
@@ -281,10 +281,10 @@ open class FABMenu: View {
     }
     
     /// An optional delegation handler.
-    open weak var delegate: FABMenuDelegate?
+    @objc open weak var delegate: FABMenuDelegate?
     
     /// A reference to the FABMenuItems
-    open var fabMenuItems: [FABMenuItem] {
+    @objc open var fabMenuItems: [FABMenuItem] {
         get {
             return spring.views as! [FABMenuItem]
         }
@@ -325,7 +325,7 @@ extension FABMenu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    open func open(duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
+    @objc open func open(duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
         open(isTriggeredByUserInteraction: false, duration: duration, delay: delay, usingSpringWithDamping: usingSpringWithDamping, initialSpringVelocity: initialSpringVelocity, options: options, animations: animations, completion: completion)
     }
     
@@ -341,7 +341,7 @@ extension FABMenu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    internal func open(isTriggeredByUserInteraction: Bool, duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
+    @objc internal func open(isTriggeredByUserInteraction: Bool, duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
         handleOpenCallback?()
         
         if isTriggeredByUserInteraction {
@@ -374,7 +374,7 @@ extension FABMenu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    open func close(duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
+    @objc open func close(duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
         close(isTriggeredByUserInteraction: false, duration: duration, delay: delay, usingSpringWithDamping: usingSpringWithDamping, initialSpringVelocity: initialSpringVelocity, options: options, animations: animations, completion: completion)
     }
     
@@ -390,7 +390,7 @@ extension FABMenu {
      - Parameter animations: An animation block to execute on each view's animation.
      - Parameter completion: A completion block to execute on each view's animation.
      */
-    internal func close(isTriggeredByUserInteraction: Bool, duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
+    @objc internal func close(isTriggeredByUserInteraction: Bool, duration: TimeInterval = 0.15, delay: TimeInterval = 0, usingSpringWithDamping: CGFloat = 0.5, initialSpringVelocity: CGFloat = 0, options: UIViewAnimationOptions = [], animations: ((UIView) -> Void)? = nil, completion: ((UIView) -> Void)? = nil) {
         handleCloseCallback?()
         
         if isTriggeredByUserInteraction {

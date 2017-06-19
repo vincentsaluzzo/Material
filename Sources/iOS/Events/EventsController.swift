@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -36,7 +36,7 @@ extension UIViewController {
      This is the recommended method of accessing the EventsController
      through child UIViewControllers.
      */
-    public var eventsController: EventsController? {
+    @objc public var eventsController: EventsController? {
         var viewController: UIViewController? = self
         while nil != viewController {
             if viewController is EventsController {
@@ -50,7 +50,7 @@ extension UIViewController {
 
 open class EventsController: UIViewController {
     /// A reference to an Events instance.
-    open let events = Events()
+    @objc open let events = Events()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ open class EventsController: UIViewController {
      The super.prepareView method should always be called immediately
      when subclassing.
      */
-    open func prepare() {
+    @objc open func prepare() {
         view.clipsToBounds = true
         view.backgroundColor = .white
         view.contentScaleFactor = Screen.scale

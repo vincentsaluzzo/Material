@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -151,7 +151,7 @@ extension UIView {
     }
     
     /// A preset wrapper around divider.contentEdgeInsets.
-    open var dividerContentEdgeInsetsPreset: EdgeInsetsPreset {
+    @objc open var dividerContentEdgeInsetsPreset: EdgeInsetsPreset {
         get {
             return divider.contentEdgeInsetsPreset
         }
@@ -161,7 +161,7 @@ extension UIView {
     }
     
     /// A reference to divider.contentEdgeInsets.
-    open var dividerContentEdgeInsets: EdgeInsets {
+    @objc open var dividerContentEdgeInsets: EdgeInsets {
         get {
             return divider.contentEdgeInsets
         }
@@ -193,7 +193,7 @@ extension UIView {
     }
     
     /// Divider animation.
-    open var dividerAlignment: DividerAlignment {
+    @objc open var dividerAlignment: DividerAlignment {
         get {
             return divider.alignment
         }
@@ -214,7 +214,7 @@ extension UIView {
     }
     
     /// Sets the divider frame.
-    open func layoutDivider() {
+    @objc open func layoutDivider() {
         divider.reload()
     }
 }

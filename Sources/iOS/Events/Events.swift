@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -135,10 +135,10 @@ public protocol EventsDelegate {
 @objc(Events)
 open class Events: NSObject {
     /// A cache of calendars.
-    open fileprivate(set) var cacheForCalendars = [AnyHashable: EKCalendar]()
+    @objc open fileprivate(set) var cacheForCalendars = [AnyHashable: EKCalendar]()
     
     /// A cache of reminders.
-    open fileprivate(set) var cacheForReminders = [AnyHashable: EKReminder]()
+    @objc open fileprivate(set) var cacheForReminders = [AnyHashable: EKReminder]()
     
     /// A boolean indicating whether to commit saves or not.
     fileprivate var isCommitted = true
@@ -147,12 +147,12 @@ open class Events: NSObject {
     fileprivate let eventStore = EKEventStore()
     
     /// The current EventsReminderAuthorizationStatus.
-    open var authorizationStatusForReminders: EventsReminderAuthorizationStatus {
+    @objc open var authorizationStatusForReminders: EventsReminderAuthorizationStatus {
         return .authorized == EKEventStore.authorizationStatus(for: .reminder) ? .authorized : .denied
     }
     
     /// A reference to an EventsDelegate.
-    open weak var delegate: EventsDelegate?
+    @objc open weak var delegate: EventsDelegate?
     
     /// Denitializer.
     deinit {
@@ -163,7 +163,7 @@ open class Events: NSObject {
      Requests authorization for reminders.
      - Parameter completion: An optional completion callback.
      */
-    open func requestAuthorizationForReminders(completion: ((EventsReminderAuthorizationStatus) -> Void)? = nil) {
+    @objc open func requestAuthorizationForReminders(completion: ((EventsReminderAuthorizationStatus) -> Void)? = nil) {
         eventStore.requestAccess(to: .reminder) { [weak self, completion = completion] (isAuthorized, _) in
             DispatchQueue.main.async { [weak self, completion = completion] in
                 guard let s = self else {
@@ -207,12 +207,12 @@ extension Events {
 
 extension Events {
     /// Begins a storage transaction.
-    open func begin() {
+    @objc open func begin() {
         isCommitted = false
     }
     
     /// Resets the storage transaction state.
-    open func reset() {
+    @objc open func reset() {
         isCommitted = true
     }
     
@@ -220,7 +220,7 @@ extension Events {
      Commits the storage transaction.
      - Parameter completion: A completion call back.
      */
-    open func commit(_ completion: ((Bool, Error?) -> Void)) {
+    @objc open func commit(_ completion: ((Bool, Error?) -> Void)) {
         reset()
         
         var success = false
@@ -242,7 +242,7 @@ extension Events {
      Creates a predicate for the events Array of calendars.
      - Parameter in calendars: An optional Array of EKCalendars.
      */
-    open func predicateForReminders(in calendars: [EKCalendar]) -> NSPredicate {
+    @objc open func predicateForReminders(in calendars: [EKCalendar]) -> NSPredicate {
         return eventStore.predicateForReminders(in: calendars)
     }
     
@@ -254,7 +254,7 @@ extension Events {
      - Parameter ending: A Date.
      - Parameter calendars: An optional Array of [EKCalendar].
      */
-    open func predicateForIncompleteReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil) -> NSPredicate {
+    @objc open func predicateForIncompleteReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil) -> NSPredicate {
         return eventStore.predicateForIncompleteReminders(withDueDateStarting: starting, ending: ending, calendars: calendars)
     }
     
@@ -266,7 +266,7 @@ extension Events {
      - Parameter ending: A Date.
      - Parameter calendars: An optional Array of [EKCalendar].
      */
-    open func predicateForCompletedReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil) -> NSPredicate {
+    @objc open func predicateForCompletedReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil) -> NSPredicate {
         return eventStore.predicateForCompletedReminders(withCompletionDateStarting: starting, ending: ending, calendars: calendars)
     }
 }
@@ -276,7 +276,7 @@ extension Events {
      Fetches all calendars for a given reminder.
      - Parameter completion: A completion call back
      */
-    open func fetchCalendarsForReminders(_ completion: @escaping ([EKCalendar]) -> Void) {
+    @objc open func fetchCalendarsForReminders(_ completion: @escaping ([EKCalendar]) -> Void) {
         DispatchQueue.global(qos: .default).async { [weak self, completion = completion] in
             guard let s = self else {
                 return
@@ -303,7 +303,7 @@ extension Events {
      - Parameter completion: A completion call back.
      - Returns: A fetch events request identifier.
      */
-    @discardableResult
+    @objc @discardableResult
     open func fetchReminders(matching predicate: NSPredicate, completion: @escaping ([EKReminder]) -> Void) -> Any {
         return eventStore.fetchReminders(matching: predicate, completion: { [weak self, completion = completion] (reminders) in
             guard let s = self else {
@@ -328,7 +328,7 @@ extension Events {
      - Parameter completion: A completion call back.
      - Returns: A fetch events request identifier.
      */
-    @discardableResult
+    @objc @discardableResult
     open func fetchReminders(in calendars: [EKCalendar], completion: @escaping ([EKReminder]) -> Void) -> Any {
         return fetchReminders(matching: predicateForReminders(in: calendars), completion: completion)
     }
@@ -342,7 +342,7 @@ extension Events {
      - Parameter completion: A completion call back.
      - Returns: A fetch events request identifier.
      */
-    @discardableResult
+    @objc @discardableResult
     open func fetchIncompleteReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil, completion: @escaping ([EKReminder]) -> Void) -> Any {
         return fetchReminders(matching: predicateForIncompleteReminders(starting: starting, ending: ending, calendars: calendars), completion: completion)
     }
@@ -356,7 +356,7 @@ extension Events {
      - Parameter completion: A completion call back.
      - Returns: A fetch events request identifier.
      */
-    @discardableResult
+    @objc @discardableResult
     open func fetchCompletedReminders(starting: Date, ending: Date, calendars: [EKCalendar]? = nil, completion: @escaping ([EKReminder]) -> Void) -> Any {
         return fetchReminders(matching: predicateForCompletedReminders(starting: starting, ending: ending, calendars: calendars), completion: completion)
     }
@@ -365,7 +365,7 @@ extension Events {
      Cancels an active events request.
      - Parameter _ identifier: An identifier.
      */
-    open func cancelFetchRequest(_ identifier: Any) {
+    @objc open func cancelFetchRequest(_ identifier: Any) {
         eventStore.cancelFetchRequest(identifier)
     }
 }
@@ -376,7 +376,7 @@ extension Events {
      - Parameter calendar title: the name of the list.
      - Parameter completion: An optional completion call back.
      */
-    open func createCalendarForReminders(title: String, completion: ((EKCalendar?, Error?) -> Void)? = nil) {
+    @objc open func createCalendarForReminders(title: String, completion: ((EKCalendar?, Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async { [weak self, completion = completion] in
             guard let s = self else {
                 return
@@ -385,7 +385,7 @@ extension Events {
             let calendar = EKCalendar(for: .reminder, eventStore: s.eventStore)
             calendar.title = title
             
-            calendar.source = s.eventStore.defaultCalendarForNewReminders().source
+            calendar.source = s.eventStore.defaultCalendarForNewReminders()?.source
                     
             var success = false
             var error: Error?
@@ -415,7 +415,7 @@ extension Events {
      - Parameter calendar: An EKCalendar.
      - Parameter completion: An optional completion call back.
      */
-    open func update(calendar: EKCalendar, completion: ((Bool, Error?) -> Void)? = nil) {
+    @objc open func update(calendar: EKCalendar, completion: ((Bool, Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async { [weak self, calendar = calendar, completion = completion] in
             guard let s = self else {
                 return
@@ -449,7 +449,7 @@ extension Events {
      - Parameter calendar identifier: The EKCalendar identifier String.
      - Parameter completion: An optional completion call back.
      */
-    open func removeCalendar(identifier: String, completion: ((Bool, Error?) -> Void)? = nil) {
+    @objc open func removeCalendar(identifier: String, completion: ((Bool, Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async { [weak self, completion = completion] in
             guard let s = self else {
                 return
@@ -544,7 +544,7 @@ extension Events {
      - Parameter reminder: An EKReminder. 
      - Parameter completion: An optional completion call back.
      */
-    open func update(reminder: EKReminder, completion: ((Bool, Error?) -> Void)? = nil) {
+    @objc open func update(reminder: EKReminder, completion: ((Bool, Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async { [weak self, reminder = reminder, completion = completion] in
             guard let s = self else {
                 return
@@ -578,7 +578,7 @@ extension Events {
      - Parameter reminder identifier: The EKReminders identifier String.
      - Parameter completion: An optional completion call back.
      */
-    open func removeReminder(identifier: String, completion: ((Bool, Error?) -> Void)? = nil) {
+    @objc open func removeReminder(identifier: String, completion: ((Bool, Error?) -> Void)? = nil) {
         DispatchQueue.global(qos: .default).async { [weak self, completion = completion] in
             guard let s = self else {
                 return
@@ -626,7 +626,7 @@ extension Events {
      - Parameter timeIntervalSinceNow: A TimeInterval.
      - Returns: An EKAlarm.
      */
-    open func createAlarm(timeIntervalSinceNow: TimeInterval) -> EKAlarm {
+    @objc open func createAlarm(timeIntervalSinceNow: TimeInterval) -> EKAlarm {
         return EKAlarm(absoluteDate: Date(timeIntervalSinceNow: timeIntervalSinceNow))
     }
     
@@ -659,7 +659,7 @@ extension Events {
      - Parameter relativeOffset offset: A TimeInterval.
      - Returns: An EKAlarm.
      */
-    open func createAlarm(relativeOffset offset: TimeInterval) -> EKAlarm {
+    @objc open func createAlarm(relativeOffset offset: TimeInterval) -> EKAlarm {
         return EKAlarm(relativeOffset: offset)
     }
 }

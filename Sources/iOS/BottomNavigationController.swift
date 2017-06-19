@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,101 +31,101 @@
 import UIKit
 
 open class BottomNavigationController: UITabBarController {
-	/**
+    /**
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
-	/**
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    /**
      An initializer that initializes the object with an Optional nib and bundle.
      - Parameter nibNameOrNil: An Optional String for the nib.
      - Parameter bundle: An Optional NSBundle where the nib is located.
      */
-	public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
-	
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
     /// An initializer that accepts no parameters.
-	public init() {
-		super.init(nibName: nil, bundle: nil)
-	}
+    public init() {
+        super.init(nibName: nil, bundle: nil)
+    }
     
     /**
      An initializer that initializes the object an Array of UIViewControllers.
      - Parameter viewControllers: An Array of UIViewControllers.
      */
-    public init(viewControllers: [UIViewController]) {
+    @objc public init(viewControllers: [UIViewController]) {
         super.init(nibName: nil, bundle: nil)
         self.viewControllers = viewControllers
     }
-	
-	open override func viewDidLoad() {
-		super.viewDidLoad()
-		prepare()
-	}
-	
-	open override func viewWillLayoutSubviews() {
-		super.viewWillLayoutSubviews()
-		layoutSubviews()
-	}
-	
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        prepare()
+    }
+    
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        layoutSubviews()
+    }
+    
     /**
      To execute in the order of the layout chain, override this
      method. `layoutSubviews` should be called immediately, unless you
      have a certain need.
      */
-    open func layoutSubviews() {
-		if let v = tabBar.items {
-			for item in v {
-				if .phone == Device.userInterfaceIdiom {
-					if nil == item.title {
-						let inset: CGFloat = 7
-						item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
-					} else {
-						let inset: CGFloat = 6
-						item.titlePositionAdjustment.vertical = -inset
-					}
-				} else {
-					if nil == item.title {
-						let inset: CGFloat = 9
-						item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
-					} else {
-						let inset: CGFloat = 3
-						item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
-						item.titlePositionAdjustment.vertical = -inset
-					}
-				}
-			}
-		}
+    @objc open func layoutSubviews() {
+        if let v = tabBar.items {
+            for item in v {
+                if .phone == Device.userInterfaceIdiom {
+                    if nil == item.title {
+                        let inset: CGFloat = 7
+                        item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
+                    } else {
+                        let inset: CGFloat = 6
+                        item.titlePositionAdjustment.vertical = -inset
+                    }
+                } else {
+                    if nil == item.title {
+                        let inset: CGFloat = 9
+                        item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
+                    } else {
+                        let inset: CGFloat = 3
+                        item.imageInsets = UIEdgeInsetsMake(inset, 0, -inset, 0)
+                        item.titlePositionAdjustment.vertical = -inset
+                    }
+                }
+            }
+        }
         
         tabBar.layoutDivider()
-	}
-	
-	/**
+    }
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
-		view.clipsToBounds = true
-		view.contentScaleFactor = Screen.scale
-		view.backgroundColor = .white
+    @objc open func prepare() {
+        view.clipsToBounds = true
+        view.contentScaleFactor = Screen.scale
+        view.backgroundColor = .white
         prepareTabBar()
-	}
-	
-	/// Prepares the tabBar.
-	private func prepareTabBar() {
-		tabBar.heightPreset = .normal
+    }
+    
+    /// Prepares the tabBar.
+    private func prepareTabBar() {
+        tabBar.heightPreset = .normal
         tabBar.depthPreset = .depth1
         tabBar.dividerAlignment = .top
         let image = UIImage()
-		tabBar.shadowImage = image
-		tabBar.backgroundImage = image
-		tabBar.backgroundColor = .white
-	}
+        tabBar.shadowImage = image
+        tabBar.backgroundImage = image
+        tabBar.backgroundColor = .white
+    }
 }

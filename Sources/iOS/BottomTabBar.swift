@@ -33,7 +33,7 @@ import UIKit
 extension UITabBarItem {
 	/// Sets the color of the title color for a state.
 	public func setTitleColor(color: UIColor, forState state: UIControlState) {
-		setTitleTextAttributes([NSForegroundColorAttributeName: color], for: state)
+        setTitleTextAttributes([NSAttributedStringKey.foregroundColor.rawValue: color], for: state)
 	}
 }
 
@@ -101,7 +101,7 @@ open class BottomTabBar: UITabBar {
 			}
 		}
         
-        layoutDivider()
+        divider.reload()
 	}
 	
 	open override func didMoveToSuperview() {

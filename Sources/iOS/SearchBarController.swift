@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,30 +31,30 @@
 import UIKit
 
 extension UIViewController {
-	/**
+    /**
      A convenience property that provides access to the SearchBarController.
      This is the recommended method of accessing the SearchBarController
      through child UIViewControllers.
      */
-	public var searchBarController: SearchBarController? {
-		var viewController: UIViewController? = self
-		while nil != viewController {
-			if viewController is SearchBarController {
-				return viewController as? SearchBarController
-			}
-			viewController = viewController?.parent
-		}
-		return nil
-	}
+    @objc public var searchBarController: SearchBarController? {
+        var viewController: UIViewController? = self
+        while nil != viewController {
+            if viewController is SearchBarController {
+                return viewController as? SearchBarController
+            }
+            viewController = viewController?.parent
+        }
+        return nil
+    }
 }
 
 open class SearchBarController: StatusBarController {
     /// Reference to the SearchBar.
     @IBInspectable
     open let searchBar = SearchBar()
-	
-	open override func layoutSubviews() {
-		super.layoutSubviews()
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         
         let y = Application.shouldStatusBarBeHidden || statusBar.isHidden ? 0 : statusBar.height
         
@@ -69,21 +69,21 @@ open class SearchBarController: StatusBarController {
         case .full:
             rootViewController.view.frame = view.bounds
         }
-	}
-	
-	/**
+    }
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open override func prepare() {
-		super.prepare()
+    open override func prepare() {
+        super.prepare()
         displayStyle = .partial
         prepareStatusBar()
-		prepareSearchBar()
-	}
+        prepareSearchBar()
+    }
 }
 
 extension SearchBarController {

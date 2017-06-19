@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -172,7 +172,7 @@ extension CALayer {
     }
     
     /// HeightPreset value.
-    open var heightPreset: HeightPreset {
+    @objc open var heightPreset: HeightPreset {
         get {
             return materialLayer.heightPreset
         }
@@ -186,7 +186,7 @@ extension CALayer {
      width or height property is set, the other will be automatically adjusted
      to maintain the shape of the object.
      */
-    open var shapePreset: ShapePreset {
+    @objc open var shapePreset: ShapePreset {
         get {
             return materialLayer.shapePreset
         }
@@ -196,7 +196,7 @@ extension CALayer {
     }
     
     /// A preset value for Depth.
-    open var depthPreset: DepthPreset {
+    @objc open var depthPreset: DepthPreset {
         get {
             return depth.preset
         }
@@ -227,7 +227,7 @@ extension CALayer {
     }
     
     /// A property that sets the cornerRadius of the backing layer.
-    open var cornerRadiusPreset: CornerRadiusPreset {
+    @objc open var cornerRadiusPreset: CornerRadiusPreset {
         get {
             return materialLayer.cornerRadiusPreset
         }
@@ -237,7 +237,7 @@ extension CALayer {
     }
     
     /// A preset property to set the borderWidth.
-    open var borderWidthPreset: BorderWidthPreset {
+    @objc open var borderWidthPreset: BorderWidthPreset {
         get {
             return materialLayer.borderWidthPreset
         }
@@ -249,7 +249,7 @@ extension CALayer {
 
 extension CALayer {
     /// Manages the layout for the shape of the view instance.
-    open func layoutShape() {
+    @objc open func layoutShape() {
         guard .none != shapePreset else {
             return
         }
@@ -270,7 +270,7 @@ extension CALayer {
     }
     
     /// Sets the shadow path.
-    open func layoutShadowPath() {
+    @objc open func layoutShadowPath() {
         guard isShadowPathAutoSizing else {
             return
         }

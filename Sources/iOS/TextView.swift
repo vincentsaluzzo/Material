@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -89,23 +89,23 @@ public protocol TextViewDelegate : UITextViewDelegate {
 
 open class TextView: UITextView {
     /// A boolean indicating whether the text is empty.
-    open var isEmpty: Bool {
+    @objc open var isEmpty: Bool {
         return 0 == text?.utf16.count
     }
     
     /// A boolean indicating whether the text is in edit mode.
-    open fileprivate(set) var isEditing = true
+    @objc open fileprivate(set) var isEditing = true
     
     /// Is the keyboard hidden.
-    open fileprivate(set) var isKeyboardHidden = true
+    @objc open fileprivate(set) var isKeyboardHidden = true
     
-	/// A property that accesses the backing layer's background
-	@IBInspectable
+    /// A property that accesses the backing layer's background
+    @IBInspectable
     open override var backgroundColor: UIColor? {
-		didSet {
-			layer.backgroundColor = backgroundColor?.cgColor
-		}
-	}
+        didSet {
+            layer.backgroundColor = backgroundColor?.cgColor
+        }
+    }
     
     /// The placeholderLabel font value.
     @IBInspectable
@@ -147,14 +147,14 @@ open class TextView: UITextView {
     }
     
     /// NSTextContainer EdgeInsets preset property.
-    open var textContainerInsetsPreset = EdgeInsetsPreset.none {
+    @objc open var textContainerInsetsPreset = EdgeInsetsPreset.none {
         didSet {
             textContainerInsets = EdgeInsetsPresetToValue(preset: textContainerInsetsPreset)
         }
     }
     
     /// NSTextContainer EdgeInsets property.
-    open var textContainerInsets: EdgeInsets {
+    @objc open var textContainerInsets: EdgeInsets {
         get {
             return textContainerInset
         }
@@ -162,18 +162,18 @@ open class TextView: UITextView {
             textContainerInset = value
         }
     }
-	
-	/**
-	 An initializer that initializes the object with a NSCoder object.
-	 - Parameter aDecoder: A NSCoder instance.
-	 */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		prepare()
-	}
+    
+    /**
+     An initializer that initializes the object with a NSCoder object.
+     - Parameter aDecoder: A NSCoder instance.
+     */
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepare()
+    }
     
     /// The string pattern to match within the textStorage.
-    open var pattern = "(^|\\s)#[\\d\\w_\u{203C}\u{2049}\u{20E3}\u{2122}\u{2139}\u{2194}-\u{2199}\u{21A9}-\u{21AA}\u{231A}-\u{231B}\u{23E9}-\u{23EC}\u{23F0}\u{23F3}\u{24C2}\u{25AA}-\u{25AB}\u{25B6}\u{25C0}\u{25FB}-\u{25FE}\u{2600}-\u{2601}\u{260E}\u{2611}\u{2614}-\u{2615}\u{261D}\u{263A}\u{2648}-\u{2653}\u{2660}\u{2663}\u{2665}-\u{2666}\u{2668}\u{267B}\u{267F}\u{2693}\u{26A0}-\u{26A1}\u{26AA}-\u{26AB}\u{26BD}-\u{26BE}\u{26C4}-\u{26C5}\u{26CE}\u{26D4}\u{26EA}\u{26F2}-\u{26F3}\u{26F5}\u{26FA}\u{26FD}\u{2702}\u{2705}\u{2708}-\u{270C}\u{270F}\u{2712}\u{2714}\u{2716}\u{2728}\u{2733}-\u{2734}\u{2744}\u{2747}\u{274C}\u{274E}\u{2753}-\u{2755}\u{2757}\u{2764}\u{2795}-\u{2797}\u{27A1}\u{27B0}\u{2934}-\u{2935}\u{2B05}-\u{2B07}\u{2B1B}-\u{2B1C}\u{2B50}\u{2B55}\u{3030}\u{303D}\u{3297}\u{3299}\u{1F004}\u{1F0CF}\u{1F170}-\u{1F171}\u{1F17E}-\u{1F17F}\u{1F18E}\u{1F191}-\u{1F19A}\u{1F1E7}-\u{1F1EC}\u{1F1EE}-\u{1F1F0}\u{1F1F3}\u{1F1F5}\u{1F1F7}-\u{1F1FA}\u{1F201}-\u{1F202}\u{1F21A}\u{1F22F}\u{1F232}-\u{1F23A}\u{1F250}-\u{1F251}\u{1F300}-\u{1F320}\u{1F330}-\u{1F335}\u{1F337}-\u{1F37C}\u{1F380}-\u{1F393}\u{1F3A0}-\u{1F3C4}\u{1F3C6}-\u{1F3CA}\u{1F3E0}-\u{1F3F0}\u{1F400}-\u{1F43E}\u{1F440}\u{1F442}-\u{1F4F7}\u{1F4F9}-\u{1F4FC}\u{1F500}-\u{1F507}\u{1F509}-\u{1F53D}\u{1F550}-\u{1F567}\u{1F5FB}-\u{1F640}\u{1F645}-\u{1F64F}\u{1F680}-\u{1F68A}]+" {
+    @objc open var pattern = "(^|\\s)#[\\d\\w_\u{203C}\u{2049}\u{20E3}\u{2122}\u{2139}\u{2194}-\u{2199}\u{21A9}-\u{21AA}\u{231A}-\u{231B}\u{23E9}-\u{23EC}\u{23F0}\u{23F3}\u{24C2}\u{25AA}-\u{25AB}\u{25B6}\u{25C0}\u{25FB}-\u{25FE}\u{2600}-\u{2601}\u{260E}\u{2611}\u{2614}-\u{2615}\u{261D}\u{263A}\u{2648}-\u{2653}\u{2660}\u{2663}\u{2665}-\u{2666}\u{2668}\u{267B}\u{267F}\u{2693}\u{26A0}-\u{26A1}\u{26AA}-\u{26AB}\u{26BD}-\u{26BE}\u{26C4}-\u{26C5}\u{26CE}\u{26D4}\u{26EA}\u{26F2}-\u{26F3}\u{26F5}\u{26FA}\u{26FD}\u{2702}\u{2705}\u{2708}-\u{270C}\u{270F}\u{2712}\u{2714}\u{2716}\u{2728}\u{2733}-\u{2734}\u{2744}\u{2747}\u{274C}\u{274E}\u{2753}-\u{2755}\u{2757}\u{2764}\u{2795}-\u{2797}\u{27A1}\u{27B0}\u{2934}-\u{2935}\u{2B05}-\u{2B07}\u{2B1B}-\u{2B1C}\u{2B50}\u{2B55}\u{3030}\u{303D}\u{3297}\u{3299}\u{1F004}\u{1F0CF}\u{1F170}-\u{1F171}\u{1F17E}-\u{1F17F}\u{1F18E}\u{1F191}-\u{1F19A}\u{1F1E7}-\u{1F1EC}\u{1F1EE}-\u{1F1F0}\u{1F1F3}\u{1F1F5}\u{1F1F7}-\u{1F1FA}\u{1F201}-\u{1F202}\u{1F21A}\u{1F22F}\u{1F232}-\u{1F23A}\u{1F250}-\u{1F251}\u{1F300}-\u{1F320}\u{1F330}-\u{1F335}\u{1F337}-\u{1F37C}\u{1F380}-\u{1F393}\u{1F3A0}-\u{1F3C4}\u{1F3C6}-\u{1F3CA}\u{1F3E0}-\u{1F3F0}\u{1F400}-\u{1F43E}\u{1F440}\u{1F442}-\u{1F4F7}\u{1F4F9}-\u{1F4FC}\u{1F500}-\u{1F507}\u{1F509}-\u{1F53D}\u{1F550}-\u{1F567}\u{1F5FB}-\u{1F640}\u{1F645}-\u{1F64F}\u{1F680}-\u{1F68A}]+" {
         didSet {
             prepareRegularExpression()
         }
@@ -191,12 +191,12 @@ open class TextView: UITextView {
      A convenience property that accesses the textStorage
      string.
      */
-    open var string: String {
+    @objc open var string: String {
         return textStorage.string
     }
     
     /// An Array of matches that match the pattern expression.
-    open var matches: [String] {
+    @objc open var matches: [String] {
         guard let v = (textStorage as? TextStorage)?.expression else {
             return []
         }
@@ -210,33 +210,33 @@ open class TextView: UITextView {
      An Array of unique matches that match the pattern
      expression.
      */
-    open var uniqueMatches: [String] {
+    @objc open var uniqueMatches: [String] {
         var set = Set<String>()
         for x in matches {
             set.insert(x)
         }
         return Array<String>(set)
     }
-	
-	/**
-	 An initializer that initializes the object with a CGRect object.
-	 If AutoLayout is used, it is better to initilize the instance
-	 using the init() initializer.
-	 - Parameter frame: A CGRect instance.
-	 - Parameter textContainer: A NSTextContainer instance.
-	 */
-	public override init(frame: CGRect, textContainer: NSTextContainer?) {
-		super.init(frame: frame, textContainer: textContainer)
-		prepare()
-	}
-	
-	/**
-	 A convenience initializer that is mostly used with AutoLayout.
-	 - Parameter textContainer: A NSTextContainer instance.
-	 */
-	public convenience init(textContainer: NSTextContainer?) {
-		self.init(frame: .zero, textContainer: textContainer)
-	}
+    
+    /**
+     An initializer that initializes the object with a CGRect object.
+     If AutoLayout is used, it is better to initilize the instance
+     using the init() initializer.
+     - Parameter frame: A CGRect instance.
+     - Parameter textContainer: A NSTextContainer instance.
+     */
+    public override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        prepare()
+    }
+    
+    /**
+     A convenience initializer that is mostly used with AutoLayout.
+     - Parameter textContainer: A NSTextContainer instance.
+     */
+    @objc public convenience init(textContainer: NSTextContainer?) {
+        self.init(frame: .zero, textContainer: textContainer)
+    }
     
     /// A convenience initializer that constructs all aspects of the textView.
     public convenience init() {
@@ -253,36 +253,36 @@ open class TextView: UITextView {
         textContainer.size = bounds.size
         textStorage.delegate = self
     }
-	
-	/// Denitializer.
-	deinit {
-		NotificationCenter.default.removeObserver(self)
-	}
-	
+    
+    /// Denitializer.
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     open override func layoutSubviews() {
-		super.layoutSubviews()
-		layoutShape()
+        super.layoutSubviews()
+        layoutShape()
         layoutShadowPath()
         layoutPlaceholderLabel()
-	}
-	
-	/**
+    }
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
-		contentScaleFactor = Screen.scale
-		textContainerInset = .zero
-		backgroundColor = nil
+    @objc open func prepare() {
+        contentScaleFactor = Screen.scale
+        textContainerInset = .zero
+        backgroundColor = nil
         font = RobotoFont.regular(with: 16)
         textColor = Color.darkText.primary
         prepareNotificationHandlers()
         prepareRegularExpression()
         preparePlaceholderLabel()
-	}
+    }
 }
 
 extension TextView {

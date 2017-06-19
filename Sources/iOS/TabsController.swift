@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -50,7 +50,7 @@ public enum TabBarAlignment: Int {
 
 extension UIViewController {
     /// pageMenuBarItem reference.
-    public private(set) var pageMenuBarItem: TabsBarItem {
+    @objc public private(set) var pageMenuBarItem: TabsBarItem {
         get {
             return AssociatedObject.get(base: self, key: &TabsBarItemKey) {
                 return TabsBarItem()
@@ -68,7 +68,7 @@ extension UIViewController {
      This is the recommended method of accessing the TabsController
      through child UIViewControllers.
      */
-    public var pageMenuController: TabsController? {
+    @objc public var pageMenuController: TabsController? {
         var viewController: UIViewController? = self
         while nil != viewController {
             if viewController is TabsController {
@@ -86,7 +86,7 @@ open class TabsController: UIViewController {
     open var selectedIndex = 0
     
     /// Enables and disables bouncing when swiping.
-    open var isBounceEnabled: Bool {
+    @objc open var isBounceEnabled: Bool {
         get {
             return scrollView.bounces
         }
@@ -104,7 +104,7 @@ open class TabsController: UIViewController {
     open let scrollView = UIScrollView()
     
     /// An Array of UIViewControllers.
-    open var viewControllers: [UIViewController] {
+    @objc open var viewControllers: [UIViewController] {
         didSet {
             oldValue.forEach { [weak self] in
                 self?.removeViewController(viewController: $0)
@@ -116,7 +116,7 @@ open class TabsController: UIViewController {
         }
     }
     
-    open var tabBarAlignment = TabBarAlignment.bottom {
+    @objc open var tabBarAlignment = TabBarAlignment.bottom {
         didSet {
             layoutSubviews()
         }
@@ -135,7 +135,7 @@ open class TabsController: UIViewController {
     fileprivate var previousContentOffset: CGFloat = 0
     
     /// The number of views used in the scrollViewPool.
-    open var viewPoolCount = 3 {
+    @objc open var viewPoolCount = 3 {
         didSet {
             layoutSubviews()
         }
@@ -145,7 +145,7 @@ open class TabsController: UIViewController {
      An initializer that accepts an Array of UIViewControllers.
      - Parameter viewControllers: An Array of UIViewControllers.
      */
-    public init(viewControllers: [UIViewController], selectedIndex: Int = 0) {
+    @objc public init(viewControllers: [UIViewController], selectedIndex: Int = 0) {
         self.viewControllers = viewControllers
         self.selectedIndex = selectedIndex
         super.init(nibName: nil, bundle: nil)
@@ -166,7 +166,7 @@ open class TabsController: UIViewController {
      method. `layoutSubviews` should be called immediately, unless you
      have a certain need.
      */
-    open func layoutSubviews() {
+    @objc open func layoutSubviews() {
         layoutTabBar()
         layoutScrollView()
         layoutViewControllers()
@@ -179,7 +179,7 @@ open class TabsController: UIViewController {
      The super.prepare method should always be called immediately
      when subclassing.
      */
-    open func prepare() {
+    @objc open func prepare() {
         view.contentScaleFactor = Screen.scale
         prepareScrollView()
         prepareViewControllers()

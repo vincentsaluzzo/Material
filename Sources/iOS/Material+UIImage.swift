@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -33,18 +33,18 @@ import Accelerate
 
 @objc(ImageFormat)
 public enum ImageFormat: Int {
-	case png
-	case jpeg
+    case png
+    case jpeg
 }
 
 extension UIImage {
     /// Width of the UIImage.
-    open var width: CGFloat {
+    @objc open var width: CGFloat {
         return size.width
     }
     
     /// Height of the UIImage.
-    open var height: CGFloat {
+    @objc open var height: CGFloat {
         return size.height
     }
 }
@@ -55,7 +55,7 @@ extension UIImage {
      - Parameter toWidth w: A width value.
      - Returns: An optional UIImage.
      */
-    open func resize(toWidth w: CGFloat) -> UIImage? {
+    @objc open func resize(toWidth w: CGFloat) -> UIImage? {
         return internalResize(toWidth: w)
     }
     
@@ -64,7 +64,7 @@ extension UIImage {
      - Parameter toHeight h: A height value.
      - Returns: An optional UIImage.
      */
-    open func resize(toHeight h: CGFloat) -> UIImage? {
+    @objc open func resize(toHeight h: CGFloat) -> UIImage? {
         return internalResize(toHeight: h)
     }
     
@@ -101,7 +101,7 @@ extension UIImage {
      - Parameter color: The UIColor to create the image from.
      - Returns: A UIImage that is the color passed in.
      */
-    open func tint(with color: UIColor) -> UIImage? {
+    @objc open func tint(with color: UIColor) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, Screen.scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
@@ -130,7 +130,7 @@ extension UIImage {
      - Parameter size: The size of the image to create.
      - Returns: A UIImage that is the color passed in.
      */
-    open class func image(with color: UIColor, size: CGSize) -> UIImage? {
+    @objc open class func image(with color: UIColor, size: CGSize) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, Screen.scale)
         guard let context = UIGraphicsGetCurrentContext() else {
             return nil
@@ -158,7 +158,7 @@ extension UIImage {
      - Parameter toHeight th: A specified height.
      - Returns: An optional UIImage.
      */
-    open func crop(toWidth tw: CGFloat, toHeight th: CGFloat) -> UIImage? {
+    @objc open func crop(toWidth tw: CGFloat, toHeight th: CGFloat) -> UIImage? {
         let g: UIImage?
         let b: Bool = width > height
         let s: CGFloat = b ? th / height : tw / width
@@ -181,7 +181,7 @@ extension UIImage {
      Creates a clear image.
      - Returns: A UIImage that is clear.
      */
-    open class func clear(size: CGSize = CGSize(width: 16, height: 16)) -> UIImage? {
+    @objc open class func clear(size: CGSize = CGSize(width: 16, height: 16)) -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -196,7 +196,7 @@ extension UIImage {
      - Parameter completion: A completion block that is executed once the image
      has been retrieved.
      */
-    open class func contentsOfURL(url: URL, completion: @escaping ((UIImage?, Error?) -> Void)) {
+    @objc open class func contentsOfURL(url: URL, completion: @escaping ((UIImage?, Error?) -> Void)) {
         URLSession.shared.dataTask(with: URLRequest(url: url)) { [completion = completion] (data: Data?, response: URLResponse?, error: Error?) in
             DispatchQueue.main.async {
                 if let v = error {
@@ -216,7 +216,7 @@ extension UIImage {
      when using Portrait.
      - Returns: An optional UIImage if successful.
      */
-    open func adjustOrientation() -> UIImage? {
+    @objc open func adjustOrientation() -> UIImage? {
         guard .up != imageOrientation else {
             return self
         }
@@ -291,7 +291,7 @@ extension UIImage {
      - Parameter saturationDeltaFactor: The delta factor for the saturation of the blur effect.
      - Returns: a UIImage.
      */
-    open func blur(radius: CGFloat = 0, tintColor: UIColor? = nil, saturationDeltaFactor: CGFloat = 0) -> UIImage? {
+    @objc open func blur(radius: CGFloat = 0, tintColor: UIColor? = nil, saturationDeltaFactor: CGFloat = 0) -> UIImage? {
         var effectImage = self
         
         let screenScale = Screen.scale

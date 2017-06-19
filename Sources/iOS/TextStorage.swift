@@ -71,6 +71,10 @@ open class TextStorage: NSTextStorage {
 	public override init() {
 		super.init()
 	}
+    
+    required public init(itemProviderData data: Data, typeIdentifier: String) throws {
+        fatalError("init(itemProviderData:typeIdentifier:) has not been implemented")
+    }
 }
 
 extension TextStorage {
@@ -105,10 +109,10 @@ extension TextStorage {
      If you don't need this value, pass NULL.
      - Returns: The attributes for the character at index.
      */
-	open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String: Any] {
-		return storage.attributes(at: location, effectiveRange: range)
-	}
-	
+    open override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [NSAttributedStringKey : Any] {
+        return storage.attributes(at: location, effectiveRange: range)
+    }
+    
 	/**
      Replaces a range of text with a string value.
      - Parameter range: The character range to replace.
@@ -126,7 +130,7 @@ extension TextStorage {
      - Parameter range: A range of characters that will have their
      attributes updated.
      */
-	open override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
+	open override func setAttributes(_ attrs: [NSAttributedStringKey : Any]?, range: NSRange) {
 		storage.setAttributes(attrs, range: range)
         edited(.editedAttributes, range: range, changeInLength: 0)
 	}
@@ -138,7 +142,7 @@ extension TextStorage {
      - Parameter range: A range of characters that will have their
      attributes added.
      */
-    open override func addAttribute(_ name: String, value: Any, range: NSRange) {
+    open override func addAttribute(_ name: NSAttributedStringKey, value: Any, range: NSRange) {
         storage.addAttribute(name, value: value, range: range)
         edited(.editedAttributes, range: range, changeInLength: 0)
     }
@@ -149,7 +153,7 @@ extension TextStorage {
      - Parameter range: A range of characters that will have their
      attributes removed.
      */
-    open override func removeAttribute(_ name: String, range: NSRange) {
+    open override func removeAttribute(_ name: NSAttributedStringKey, range: NSRange) {
         storage.removeAttribute(name, range: range)
         edited(.editedAttributes, range: range, changeInLength: 0)
     }

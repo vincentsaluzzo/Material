@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -42,7 +42,7 @@ extension UIViewController {
      This is the recommended method of accessing the FABMenuController
      through child UIViewControllers.
      */
-    public var fabMenuController: FABMenuController? {
+    @objc public var fabMenuController: FABMenuController? {
         var viewController: UIViewController? = self
         while nil != viewController {
             if viewController is FABMenuController {
@@ -63,10 +63,10 @@ open class FABMenuController: RootController {
     open var fabMenuBacking = FABMenuBacking.blur
     
     /// The fabMenuBacking UIBlurEffectStyle.
-    open var fabMenuBackingBlurEffectStyle = UIBlurEffectStyle.light
+    @objc open var fabMenuBackingBlurEffectStyle = UIBlurEffectStyle.light
     
     /// A reference to the blurView.
-    open fileprivate(set) var blurView: UIView?
+    @objc open fileprivate(set) var blurView: UIView?
     
     open override func layoutSubviews() {
         super.layoutSubviews()

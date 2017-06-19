@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -31,21 +31,21 @@
 import UIKit
 
 extension UIViewController {
-	/**
+    /**
      A convenience property that provides access to the StatusBarController.
      This is the recommended method of accessing the StatusBarController
      through child UIViewControllers.
      */
-	public var statusBarController: StatusBarController? {
-		var viewController: UIViewController? = self
-		while nil != viewController {
-			if viewController is StatusBarController {
-				return viewController as? StatusBarController
-			}
-			viewController = viewController?.parent
-		}
-		return nil
-	}
+    @objc public var statusBarController: StatusBarController? {
+        var viewController: UIViewController? = self
+        while nil != viewController {
+            if viewController is StatusBarController {
+                return viewController as? StatusBarController
+            }
+            viewController = viewController?.parent
+        }
+        return nil
+    }
 }
 
 open class StatusBarController: RootController {
@@ -54,14 +54,14 @@ open class StatusBarController: RootController {
      display the rootViewController to the full view
      bounds, or up to the toolbar height.
      */
-    open var displayStyle = DisplayStyle.full {
+    @objc open var displayStyle = DisplayStyle.full {
         didSet {
             layoutSubviews()
         }
     }
     
     /// Device status bar style.
-    open var statusBarStyle: UIStatusBarStyle {
+    @objc open var statusBarStyle: UIStatusBarStyle {
         get {
             return Application.statusBarStyle
         }
@@ -71,7 +71,7 @@ open class StatusBarController: RootController {
     }
     
     /// Device visibility state.
-    open var isStatusBarHidden: Bool {
+    @objc open var isStatusBarHidden: Bool {
         get {
             return Application.isStatusBarHidden
         }
@@ -82,18 +82,18 @@ open class StatusBarController: RootController {
     }
     
     /// A boolean that indicates to hide the statusBar on rotation.
-    open var shouldHideStatusBarOnRotation = true
+    @objc open var shouldHideStatusBarOnRotation = true
     
     /// A reference to the statusBar.
-    open let statusBar = UIView()
-	
-	/**
+    @objc open let statusBar = UIView()
+    
+    /**
      To execute in the order of the layout chain, override this
      method. LayoutSubviews should be called immediately, unless you
      have a certain need.
      */
-	open override func layoutSubviews() {
-		super.layoutSubviews()
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         if shouldHideStatusBarOnRotation {
             statusBar.isHidden = Application.shouldStatusBarBeHidden
         }
@@ -108,19 +108,19 @@ open class StatusBarController: RootController {
         case .full:
             rootViewController.view.frame = view.bounds
         }
-	}
-	
-	/**
+    }
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open override func prepare() {
+    open override func prepare() {
         super.prepare()
-		prepareStatusBar()
-	}
+        prepareStatusBar()
+    }
 }
 
 extension StatusBarController {

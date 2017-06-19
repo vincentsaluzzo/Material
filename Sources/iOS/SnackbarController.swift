@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -78,7 +78,7 @@ extension UIViewController {
      This is the recommended method of accessing the SnackbarController
      through child UIViewControllers.
      */
-    public var snackbarController: SnackbarController? {
+    @objc public var snackbarController: SnackbarController? {
         var viewController: UIViewController? = self
         while nil != viewController {
             if viewController is SnackbarController {
@@ -92,19 +92,19 @@ extension UIViewController {
 
 open class SnackbarController: RootController {
     /// Reference to the Snackbar.
-    open let snackbar = Snackbar()
+    @objc open let snackbar = Snackbar()
     
     /// A boolean indicating if the Snacbar is animating.
-    open internal(set) var isAnimating = false
+    @objc open internal(set) var isAnimating = false
     
     /// Delegation handler.
-    open weak var delegate: SnackbarControllerDelegate?
+    @objc open weak var delegate: SnackbarControllerDelegate?
     
     /// Snackbar alignment setting.
-    open var snackbarAlignment = SnackbarAlignment.bottom
+    @objc open var snackbarAlignment = SnackbarAlignment.bottom
     
     /// A preset wrapper around snackbarEdgeInsets.
-    open var snackbarEdgeInsetsPreset = EdgeInsetsPreset.none {
+    @objc open var snackbarEdgeInsetsPreset = EdgeInsetsPreset.none {
         didSet {
             snackbarEdgeInsets = EdgeInsetsPresetToValue(preset: snackbarEdgeInsetsPreset)
         }
@@ -122,7 +122,7 @@ open class SnackbarController: RootController {
      Animates to a SnackbarStatus.
      - Parameter status: A SnackbarStatus enum value.
      */
-    @discardableResult
+    @objc @discardableResult
     open func animate(snackbar status: SnackbarStatus, delay: TimeInterval = 0, animations: ((Snackbar) -> Void)? = nil, completion: ((Snackbar) -> Void)? = nil) -> MotionDelayCancelBlock? {
         return Motion.delay(delay) { [weak self, status = status, animations = animations, completion = completion] in
             guard let s = self else {
@@ -182,7 +182,7 @@ open class SnackbarController: RootController {
     }
     
     /// Reloads the view.
-    open func reload() {
+    @objc open func reload() {
         snackbar.x = snackbarEdgeInsets.left
         snackbar.width = view.width - snackbarEdgeInsets.left - snackbarEdgeInsets.right
         rootViewController.view.frame = view.bounds

@@ -36,7 +36,7 @@ open class RootController: UIViewController {
      with the rootViewController.
      */
 	@IBInspectable
-    open var isUserInteractionEnabled: Bool {
+    @objc open var isUserInteractionEnabled: Bool {
 		get {
 			return rootViewController.view.isUserInteractionEnabled
 		}
@@ -51,7 +51,7 @@ open class RootController: UIViewController {
      is recommended to use the transitionFromRootViewController
      helper method.
      */
-	open fileprivate(set) var rootViewController: UIViewController!
+	@objc open fileprivate(set) var rootViewController: UIViewController!
 	
 	/**
      An initializer that initializes the object with a NSCoder object.
@@ -59,6 +59,7 @@ open class RootController: UIViewController {
      */
 	public required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
+		prepare()
 	}
 	
 	/**
@@ -68,6 +69,7 @@ open class RootController: UIViewController {
      */
 	public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		prepare()
 	}
 	
 	/**
@@ -77,12 +79,8 @@ open class RootController: UIViewController {
 	public init(rootViewController: UIViewController) {
 		super.init(nibName: nil, bundle: nil)
 		self.rootViewController = rootViewController
+		prepare()
 	}
-    
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-        prepare()
-    }
 	
 	open override func viewWillLayoutSubviews() {
 		super.viewWillLayoutSubviews()
@@ -153,7 +151,7 @@ open class RootController: UIViewController {
 
 extension RootController {
     /// A method that prepares the rootViewController.
-    internal func prepareRootViewController() {
+    @objc internal func prepareRootViewController() {
         prepare(viewController: rootViewController, withContainer: view)
     }
     

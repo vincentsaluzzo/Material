@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,67 +32,67 @@ import UIKit
 
 @objc(NavigationDrawerPosition)
 public enum NavigationDrawerPosition: Int {
-	case left
-	case right
+    case left
+    case right
 }
 
 extension UIViewController {
-	/**
-	A convenience property that provides access to the NavigationDrawerController. 
-	This is the recommended method of accessing the NavigationDrawerController
-	through child UIViewControllers.
-	*/
-	public var navigationDrawerController: NavigationDrawerController? {
-		var viewController: UIViewController? = self
-		while nil != viewController {
-			if viewController is NavigationDrawerController {
-				return viewController as? NavigationDrawerController
-			}
-			viewController = viewController?.parent
-		}
-		return nil
-	}
+    /**
+    A convenience property that provides access to the NavigationDrawerController. 
+    This is the recommended method of accessing the NavigationDrawerController
+    through child UIViewControllers.
+    */
+    @objc public var navigationDrawerController: NavigationDrawerController? {
+        var viewController: UIViewController? = self
+        while nil != viewController {
+            if viewController is NavigationDrawerController {
+                return viewController as? NavigationDrawerController
+            }
+            viewController = viewController?.parent
+        }
+        return nil
+    }
 }
 
 @objc(NavigationDrawerControllerDelegate)
 public protocol NavigationDrawerControllerDelegate {
-	/**
+    /**
      An optional delegation method that is fired before the
      NavigationDrawerController opens.
      - Parameter navigationDrawerController: A NavigationDrawerController.
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, willOpen position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, willOpen position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired after the
      NavigationDrawerController opened.
      - Parameter navigationDrawerController: A NavigationDrawerController.
      - Parameter position: The NavigationDrawerPosition.
      */
-	@objc
+    @objc
     optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didOpen position: NavigationDrawerPosition)
-	
-	/**
+    
+    /**
      An optional delegation method that is fired before the
      NavigationDrawerController closes.
      - Parameter navigationDrawerController: A NavigationDrawerController.
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, willClose position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, willClose position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired after the
      NavigationDrawerController closed.
      - Parameter navigationDrawerController: A NavigationDrawerController.
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didClose position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didClose position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired when the
      NavigationDrawerController pan gesture begins.
      - Parameter navigationDrawerController: A NavigationDrawerController.
@@ -100,9 +100,9 @@ public protocol NavigationDrawerControllerDelegate {
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didBeginPanAt point: CGPoint, position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didBeginPanAt point: CGPoint, position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired when the
      NavigationDrawerController pan gesture changes position.
      - Parameter navigationDrawerController: A NavigationDrawerController.
@@ -110,9 +110,9 @@ public protocol NavigationDrawerControllerDelegate {
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didChangePanAt point: CGPoint, position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didChangePanAt point: CGPoint, position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired when the
      NavigationDrawerController pan gesture ends.
      - Parameter navigationDrawerController: A NavigationDrawerController.
@@ -120,9 +120,9 @@ public protocol NavigationDrawerControllerDelegate {
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didEndPanAt point: CGPoint, position: NavigationDrawerPosition)
-	
-	/**
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didEndPanAt point: CGPoint, position: NavigationDrawerPosition)
+    
+    /**
      An optional delegation method that is fired when the
      NavigationDrawerController tap gesture executes.
      - Parameter navigationDrawerController: A NavigationDrawerController.
@@ -130,291 +130,291 @@ public protocol NavigationDrawerControllerDelegate {
      - Parameter position: The NavigationDrawerPosition.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didTapAt point: CGPoint, position: NavigationDrawerPosition)
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, didTapAt point: CGPoint, position: NavigationDrawerPosition)
 
-	/**
+    /**
      An optional delegation method that is fired when the
      status bar is about to change display, isHidden or not.
      - Parameter navigationDrawerController: A NavigationDrawerController.
      - Parameter statusBar isHidden: A boolean.
      */
     @objc
-	optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, statusBar isHidden: Bool)
+    optional func navigationDrawerController(navigationDrawerController: NavigationDrawerController, statusBar isHidden: Bool)
 }
 
 @objc(NavigationDrawerController)
 open class NavigationDrawerController: RootController {
-	/**
+    /**
      A CGFloat property that is used internally to track
      the original (x) position of the container view when panning.
      */
-	fileprivate var originalX: CGFloat = 0
-	
-	/**
+    fileprivate var originalX: CGFloat = 0
+    
+    /**
      A UIPanGestureRecognizer property internally used for the
      leftView pan gesture.
      */
-	internal fileprivate(set) var leftPanGesture: UIPanGestureRecognizer?
-	
+    @objc internal fileprivate(set) var leftPanGesture: UIPanGestureRecognizer?
+    
     /**
      A UITapGestureRecognizer property internally used for the
      leftView tap gesture.
      */
-    internal fileprivate(set) var leftTapGesture: UITapGestureRecognizer?
+    @objc internal fileprivate(set) var leftTapGesture: UITapGestureRecognizer?
     
-	/**
+    /**
      A UIPanGestureRecognizer property internally used for the
      rightView pan gesture.
      */
-	internal fileprivate(set) var rightPanGesture: UIPanGestureRecognizer?
-	
-	/**
+    @objc internal fileprivate(set) var rightPanGesture: UIPanGestureRecognizer?
+    
+    /**
      A UITapGestureRecognizer property internally used for the
      rightView tap gesture.
      */
-	internal fileprivate(set) var rightTapGesture: UITapGestureRecognizer?
-	
-	/**
+    @objc internal fileprivate(set) var rightTapGesture: UITapGestureRecognizer?
+    
+    /**
      A CGFloat property that accesses the leftView threshold of
      the NavigationDrawerController. When the panning gesture has
      ended, if the position is beyond the threshold,
      the leftView is opened, if it is below the threshold, the
      leftView is closed.
      */
-	@IBInspectable
+    @IBInspectable
     open var leftThreshold: CGFloat = 64
-	fileprivate var leftViewThreshold: CGFloat = 0
-	
-	/**
+    fileprivate var leftViewThreshold: CGFloat = 0
+    
+    /**
      A CGFloat property that accesses the rightView threshold of
      the NavigationDrawerController. When the panning gesture has
      ended, if the position is beyond the threshold,
      the rightView is closed, if it is below the threshold, the
      rightView is opened.
      */
-	@IBInspectable
+    @IBInspectable
     open var rightThreshold: CGFloat = 64
-	fileprivate var rightViewThreshold: CGFloat = 0
-	
-	/**
+    fileprivate var rightViewThreshold: CGFloat = 0
+    
+    /**
      A NavigationDrawerControllerDelegate property used to bind
      the delegation object.
      */
-	open weak var delegate: NavigationDrawerControllerDelegate?
-	
-	/**
+    @objc open weak var delegate: NavigationDrawerControllerDelegate?
+    
+    /**
      A CGFloat property that sets the animation duration of the
      leftView when closing and opening. Defaults to 0.25.
      */
-	@IBInspectable
+    @IBInspectable
     open var animationDuration: TimeInterval = 0.25
-	
-	/**
+    
+    /**
      A Boolean property that enables and disables the leftView from
      opening and closing. Defaults to true.
      */
-	@IBInspectable
+    @IBInspectable
     open var isEnabled: Bool {
-		get {
-			return isLeftViewEnabled || isRightViewEnabled
-		}
-		set(value) {
-			if nil != leftView {
-				isLeftViewEnabled = value
-			}
-			if nil != rightView {
-				isRightViewEnabled = value
-			}
-		}
-	}
-	
-	/**
+        get {
+            return isLeftViewEnabled || isRightViewEnabled
+        }
+        set(value) {
+            if nil != leftView {
+                isLeftViewEnabled = value
+            }
+            if nil != rightView {
+                isRightViewEnabled = value
+            }
+        }
+    }
+    
+    /**
      A Boolean property that enables and disables the leftView from
      opening and closing. Defaults to true.
      */
-	@IBInspectable
+    @IBInspectable
     open var isLeftViewEnabled = false {
-		didSet {
-			isLeftPanGestureEnabled = isLeftViewEnabled
-			isLeftTapGestureEnabled = isLeftViewEnabled
-		}
-	}
-	
-	/// Enables the left pan gesture.
-	@IBInspectable
+        didSet {
+            isLeftPanGestureEnabled = isLeftViewEnabled
+            isLeftTapGestureEnabled = isLeftViewEnabled
+        }
+    }
+    
+    /// Enables the left pan gesture.
+    @IBInspectable
     open var isLeftPanGestureEnabled = false {
-		didSet {
-			if isLeftPanGestureEnabled {
-				prepareLeftPanGesture()
-			} else {
-				removeLeftPanGesture()
-			}
-		}
-	}
-	
-	/// Enables the left tap gesture.
-	@IBInspectable
+        didSet {
+            if isLeftPanGestureEnabled {
+                prepareLeftPanGesture()
+            } else {
+                removeLeftPanGesture()
+            }
+        }
+    }
+    
+    /// Enables the left tap gesture.
+    @IBInspectable
     open var isLeftTapGestureEnabled = false {
-		didSet {
-			if isLeftTapGestureEnabled {
-				prepareLeftTapGesture()
-			} else {
-				removeLeftTapGesture()
-			}
-		}
-	}
-	
-	/**
+        didSet {
+            if isLeftTapGestureEnabled {
+                prepareLeftTapGesture()
+            } else {
+                removeLeftTapGesture()
+            }
+        }
+    }
+    
+    /**
      A Boolean property that enables and disables the rightView from
      opening and closing. Defaults to true.
      */
-	@IBInspectable
+    @IBInspectable
     open var isRightViewEnabled = false {
-		didSet {
-			isRightPanGestureEnabled = isRightViewEnabled
-			isRightTapGestureEnabled = isRightViewEnabled
-		}
-	}
-	
-	/// Enables the right pan gesture.
-	@IBInspectable
+        didSet {
+            isRightPanGestureEnabled = isRightViewEnabled
+            isRightTapGestureEnabled = isRightViewEnabled
+        }
+    }
+    
+    /// Enables the right pan gesture.
+    @IBInspectable
     open var isRightPanGestureEnabled = false {
-		didSet {
-			if isRightPanGestureEnabled {
-				prepareRightPanGesture()
-			} else {
-				removeRightPanGesture()
-			}
-		}
-	}
-	
-	/// Enables the right tap gesture.
-	@IBInspectable
+        didSet {
+            if isRightPanGestureEnabled {
+                prepareRightPanGesture()
+            } else {
+                removeRightPanGesture()
+            }
+        }
+    }
+    
+    /// Enables the right tap gesture.
+    @IBInspectable
     open var isRightTapGestureEnabled = false {
-		didSet {
-			if isRightTapGestureEnabled {
-				prepareRightTapGesture()
-			} else {
-				removeRightTapGesture()
-			}
-		}
-	}
-	
-	/**
+        didSet {
+            if isRightTapGestureEnabled {
+                prepareRightTapGesture()
+            } else {
+                removeRightTapGesture()
+            }
+        }
+    }
+    
+    /**
      A Boolean property that triggers the status bar to be isHidden
      when the leftView is opened. Defaults to true.
      */
-	@IBInspectable
+    @IBInspectable
     open var isHiddenStatusBarEnabled = true
-	
-	/**
+    
+    /**
      A DepthPreset property that is used to set the depth of the
      leftView when opened.
      */
-    open var depthPreset = DepthPreset.depth1
-	
-	/**
+    @objc open var depthPreset = DepthPreset.depth1
+    
+    /**
      A UIView property that is used to hide and reveal the
      leftViewController. It is very rare that this property will
      need to be accessed externally.
      */
-	open fileprivate(set) var leftView: UIView?
-	
-	/**
+    @objc open fileprivate(set) var leftView: UIView?
+    
+    /**
      A UIView property that is used to hide and reveal the
      rightViewController. It is very rare that this property will
      need to be accessed externally.
      */
-	open fileprivate(set) var rightView: UIView?
-	
-	/// Indicates whether the leftView or rightView is opened.
-	open var isOpened: Bool {
-		return isLeftViewOpened || isRightViewOpened
-	}
-	
-	/// indicates if the leftView is opened.
-	open var isLeftViewOpened: Bool {
-		guard let v = leftView else {
-			return false
-		}
-		return v.x != -leftViewWidth
-	}
-	
-	/// Indicates if the rightView is opened.
-	open var isRightViewOpened: Bool {
-		guard let v = rightView else {
-			return false
-		}
-		return v.x != Screen.width
-	}
-	
-	/**
+    @objc open fileprivate(set) var rightView: UIView?
+    
+    /// Indicates whether the leftView or rightView is opened.
+    @objc open var isOpened: Bool {
+        return isLeftViewOpened || isRightViewOpened
+    }
+    
+    /// indicates if the leftView is opened.
+    @objc open var isLeftViewOpened: Bool {
+        guard let v = leftView else {
+            return false
+        }
+        return v.x != -leftViewWidth
+    }
+    
+    /// Indicates if the rightView is opened.
+    @objc open var isRightViewOpened: Bool {
+        guard let v = rightView else {
+            return false
+        }
+        return v.x != Screen.width
+    }
+    
+    /**
      Content view controller to encompase the entire component. This is
      primarily used when the StatusBar is being isHidden. The alpha value of
      the rootViewController decreases, and shows the StatusBar. To avoid
      this, and to add a isHidden transition viewController for complex
      situations, the contentViewController was added.
      */
-	open fileprivate(set) lazy var contentViewController = UIViewController()
-	
-	/**
+    @objc open fileprivate(set) lazy var contentViewController = UIViewController()
+    
+    /**
      A UIViewController property that references the
      active left UIViewController.
      */
-	open fileprivate(set) var leftViewController: UIViewController?
-	
-	/**
+    @objc open fileprivate(set) var leftViewController: UIViewController?
+    
+    /**
      A UIViewController property that references the
      active right UIViewController.
      */
-	open fileprivate(set) var rightViewController: UIViewController?
-	
-	/**
+    @objc open fileprivate(set) var rightViewController: UIViewController?
+    
+    /**
      A CGFloat property to access the width that the leftView
      opens up to.
      */
-	@IBInspectable
+    @IBInspectable
     open fileprivate(set) var leftViewWidth: CGFloat = 0
-	
-	/**
+    
+    /**
      A CGFloat property to access the width that the rightView
      opens up to.
      */
-	@IBInspectable
+    @IBInspectable
     open fileprivate(set) var rightViewWidth: CGFloat = 0
-	
-	/**
+    
+    /**
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         prepare()
-	}
-	
-	/**
+    }
+    
+    /**
      An initializer that initializes the object with an Optional nib and bundle.
      - Parameter nibNameOrNil: An Optional String for the nib.
      - Parameter bundle: An Optional NSBundle where the nib is located.
      */
-	public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         prepare()
-	}
-	
-	/**
+    }
+    
+    /**
      An initializer for the NavigationDrawerController.
      - Parameter rootViewController: The main UIViewController.
      - Parameter leftViewController: An Optional left UIViewController.
      - Parameter rightViewController: An Optional right UIViewController.
      */
-	public init(rootViewController: UIViewController, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {
-		super.init(rootViewController: rootViewController)
-		self.leftViewController = leftViewController
-		self.rightViewController = rightViewController
-		prepare()
-	}
-	
+    @objc public init(rootViewController: UIViewController, leftViewController: UIViewController? = nil, rightViewController: UIViewController? = nil) {
+        super.init(rootViewController: rootViewController)
+        self.leftViewController = leftViewController
+        self.rightViewController = rightViewController
+        prepare()
+    }
+    
     open override func transition(to viewController: UIViewController, duration: TimeInterval = 0.5, options: UIViewAnimationOptions = [], animations: (() -> Void)? = nil, completion: ((Bool) -> Void)? = nil) {
         super.transition(to: viewController, duration: duration, options: options, animations: animations) { [weak self, completion = completion] (result) in
             guard let s = self else {
@@ -426,43 +426,43 @@ open class NavigationDrawerController: RootController {
         }
     }
     
-	/// Layout subviews.
-	open override func layoutSubviews() {
+    /// Layout subviews.
+    open override func layoutSubviews() {
         super.layoutSubviews()
-		toggleStatusBar()
+        toggleStatusBar()
         
         if let v = leftView {
-			v.width = leftViewWidth
-			v.height = view.bounds.height
-			leftViewThreshold = leftViewWidth / 2
-			if let vc = leftViewController {
-				vc.view.width = leftViewWidth
-				vc.view.height = v.bounds.height
+            v.width = leftViewWidth
+            v.height = view.bounds.height
+            leftViewThreshold = leftViewWidth / 2
+            if let vc = leftViewController {
+                vc.view.width = leftViewWidth
+                vc.view.height = v.bounds.height
                 vc.view.center = CGPoint(x: leftViewWidth / 2, y: v.bounds.height / 2)
-			}
-		}
-		
-		if let v = rightView {
-			v.width = rightViewWidth
-			v.height = view.bounds.height
-			rightViewThreshold = view.bounds.width - rightViewWidth / 2
-			if let vc = rightViewController {
-				vc.view.width = rightViewWidth
-				vc.view.height = v.bounds.height
+            }
+        }
+        
+        if let v = rightView {
+            v.width = rightViewWidth
+            v.height = view.bounds.height
+            rightViewThreshold = view.bounds.width - rightViewWidth / 2
+            if let vc = rightViewController {
+                vc.view.width = rightViewWidth
+                vc.view.height = v.bounds.height
                 vc.view.center = CGPoint(x: rightViewWidth / 2, y: v.bounds.height / 2)
-			}
-		}
-	}
-	
+            }
+        }
+    }
+    
     open override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-		// Ensures the view is isHidden.
+        // Ensures the view is isHidden.
         guard let v = rightView else {
             return
         }
         
         v.position.x = size.width + (isRightViewOpened ? -v.bounds.width : v.bounds.width) / 2
-	}
+    }
     
     /**
      Prepares the view instance when intialized. When subclassing,
@@ -477,8 +477,8 @@ open class NavigationDrawerController: RootController {
         prepareLeftView()
         prepareRightView()
     }
-	
-	/**
+    
+    /**
      A method that is used to set the width of the leftView when
      opened. This is the recommended method of setting the leftView
      width.
@@ -488,7 +488,7 @@ open class NavigationDrawerController: RootController {
      - Parameter animated: A Boolean value that indicates to animate
      the leftView width change.
      */
-	open func setLeftViewWidth(width: CGFloat, isHidden: Bool, animated: Bool, duration: TimeInterval = 0.5) {
+    @objc open func setLeftViewWidth(width: CGFloat, isHidden: Bool, animated: Bool, duration: TimeInterval = 0.5) {
         guard let v = leftView else {
             return
         }
@@ -558,9 +558,9 @@ open class NavigationDrawerController: RootController {
             
             layoutSubviews()
         }
-	}
-	
-	/**
+    }
+    
+    /**
      A method that is used to set the width of the rightView when
      opened. This is the recommended method of setting the rightView
      width.
@@ -570,7 +570,7 @@ open class NavigationDrawerController: RootController {
      - Parameter animated: A Boolean value that indicates to animate
      the rightView width change.
      */
-	open func setRightViewWidth(width: CGFloat, isHidden: Bool, animated: Bool, duration: TimeInterval = 0.5) {
+    @objc open func setRightViewWidth(width: CGFloat, isHidden: Bool, animated: Bool, duration: TimeInterval = 0.5) {
         guard let v = rightView else {
             return
         }
@@ -640,37 +640,37 @@ open class NavigationDrawerController: RootController {
             
             layoutSubviews()
         }
-	}
-	
-	/**
+    }
+    
+    /**
      A method that toggles the leftView opened if previously closed,
      or closed if previously opened.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func toggleLeftView(velocity: CGFloat = 0) {
-		isLeftViewOpened ? closeLeftView(velocity: velocity) : openLeftView(velocity: velocity)
-	}
-	
-	/**
+    @objc open func toggleLeftView(velocity: CGFloat = 0) {
+        isLeftViewOpened ? closeLeftView(velocity: velocity) : openLeftView(velocity: velocity)
+    }
+    
+    /**
      A method that toggles the rightView opened if previously closed,
      or closed if previously opened.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func toggleRightView(velocity: CGFloat = 0) {
-		isRightViewOpened ? closeRightView(velocity: velocity) : openRightView(velocity: velocity)
-	}
-	
-	/**
+    @objc open func toggleRightView(velocity: CGFloat = 0) {
+        isRightViewOpened ? closeRightView(velocity: velocity) : openRightView(velocity: velocity)
+    }
+    
+    /**
      A method that opens the leftView.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func openLeftView(velocity: CGFloat = 0) {
+    @objc open func openLeftView(velocity: CGFloat = 0) {
         guard isLeftViewEnabled else {
             return
         }
@@ -701,15 +701,15 @@ open class NavigationDrawerController: RootController {
                 
                 s.delegate?.navigationDrawerController?(navigationDrawerController: s, didOpen: .left)
             }
-	}
-	
-	/**
+    }
+    
+    /**
      A method that opens the rightView.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func openRightView(velocity: CGFloat = 0) {
+    @objc open func openRightView(velocity: CGFloat = 0) {
         guard isRightViewEnabled else {
             return
         }
@@ -740,15 +740,15 @@ open class NavigationDrawerController: RootController {
                 
                 s.delegate?.navigationDrawerController?(navigationDrawerController: s, didOpen: .right)
             }
-	}
-	
-	/**
+    }
+    
+    /**
      A method that closes the leftView.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func closeLeftView(velocity: CGFloat = 0) {
+    @objc open func closeLeftView(velocity: CGFloat = 0) {
         guard isLeftViewEnabled else {
             return
         }
@@ -779,15 +779,15 @@ open class NavigationDrawerController: RootController {
                 
                 s.delegate?.navigationDrawerController?(navigationDrawerController: s, didClose: .left)
             }
-	}
-	
-	/**
+    }
+    
+    /**
      A method that closes the rightView.
      - Parameter velocity: A CGFloat value that sets the
      velocity of the user interaction when animating the
      leftView. Defaults to 0.
      */
-	open func closeRightView(velocity: CGFloat = 0) {
+    @objc open func closeRightView(velocity: CGFloat = 0) {
         guard isRightViewEnabled else {
             return
         }
@@ -818,63 +818,63 @@ open class NavigationDrawerController: RootController {
                 
                 s.delegate?.navigationDrawerController?(navigationDrawerController: s, didClose: .right)
             }
-	}
-	
-	/// A method that removes the passed in pan and leftView tap gesture recognizers.
-	fileprivate func removeLeftViewGestures() {
-		removeLeftPanGesture()
-		removeLeftTapGesture()
-	}
-	
-	/// Removes the left pan gesture.
-	fileprivate func removeLeftPanGesture() {
+    }
+    
+    /// A method that removes the passed in pan and leftView tap gesture recognizers.
+    fileprivate func removeLeftViewGestures() {
+        removeLeftPanGesture()
+        removeLeftTapGesture()
+    }
+    
+    /// Removes the left pan gesture.
+    fileprivate func removeLeftPanGesture() {
         guard let v = leftPanGesture else {
             return
         }
         
         view.removeGestureRecognizer(v)
         leftPanGesture = nil
-	}
-	
-	/// Removes the left tap gesture.
-	fileprivate func removeLeftTapGesture() {
+    }
+    
+    /// Removes the left tap gesture.
+    fileprivate func removeLeftTapGesture() {
         guard let v = leftTapGesture else {
             return
         }
         
         view.removeGestureRecognizer(v)
         leftTapGesture = nil
-	}
-	
-	/// A method that removes the passed in pan and rightView tap gesture recognizers.
-	fileprivate func removeRightViewGestures() {
-		removeRightPanGesture()
-		removeRightTapGesture()
-		
-	}
-	
-	/// Removes the right pan gesture.
-	fileprivate func removeRightPanGesture() {
+    }
+    
+    /// A method that removes the passed in pan and rightView tap gesture recognizers.
+    fileprivate func removeRightViewGestures() {
+        removeRightPanGesture()
+        removeRightTapGesture()
+        
+    }
+    
+    /// Removes the right pan gesture.
+    fileprivate func removeRightPanGesture() {
         guard let v = rightPanGesture else {
             return
         }
         
         view.removeGestureRecognizer(v)
         rightPanGesture = nil
-	}
-	
-	/// Removes the right tap gesture.
-	fileprivate func removeRightTapGesture() {
+    }
+    
+    /// Removes the right tap gesture.
+    fileprivate func removeRightTapGesture() {
         guard let v = rightTapGesture else {
             return
         }
         
         view.removeGestureRecognizer(v)
         rightTapGesture = nil
-	}
-	
-	/// Shows the statusBar.
-	fileprivate func showStatusBar() {
+    }
+    
+    /// Shows the statusBar.
+    fileprivate func showStatusBar() {
         DispatchQueue.main.async { [weak self] in
             guard let s = self else {
                 return
@@ -888,10 +888,10 @@ open class NavigationDrawerController: RootController {
             
             s.delegate?.navigationDrawerController?(navigationDrawerController: s, statusBar: false)
         }
-	}
-	
-	/// Hides the statusBar.
-	fileprivate func hideStatusBar() {
+    }
+    
+    /// Hides the statusBar.
+    fileprivate func hideStatusBar() {
         guard isHiddenStatusBarEnabled else {
             return
         }
@@ -909,18 +909,18 @@ open class NavigationDrawerController: RootController {
             
             s.delegate?.navigationDrawerController?(navigationDrawerController: s, statusBar: true)
         }
-	}
-	
-	/// Toggles the statusBar
-	fileprivate func toggleStatusBar() {
-		if isOpened {
-			hideStatusBar()
-		} else {
-			showStatusBar()
-		}
-	}
-	
-	/**
+    }
+    
+    /// Toggles the statusBar
+    fileprivate func toggleStatusBar() {
+        if isOpened {
+            hideStatusBar()
+        } else {
+            showStatusBar()
+        }
+    }
+    
+    /**
      A method that determines whether the passed point is
      contained within the bounds of the leftViewThreshold
      and height of the NavigationDrawerController view frame
@@ -929,11 +929,11 @@ open class NavigationDrawerController: RootController {
      - Returns: A Boolean of the result, true if yes, false
      otherwise.
      */
-	fileprivate func isPointContainedWithinLeftThreshold(point: CGPoint) -> Bool {
-		return point.x <= leftThreshold
-	}
-	
-	/**
+    fileprivate func isPointContainedWithinLeftThreshold(point: CGPoint) -> Bool {
+        return point.x <= leftThreshold
+    }
+    
+    /**
      A method that determines whether the passed point is
      contained within the bounds of the rightViewThreshold
      and height of the NavigationDrawerController view frame
@@ -942,11 +942,11 @@ open class NavigationDrawerController: RootController {
      - Returns: A Boolean of the result, true if yes, false
      otherwise.
      */
-	fileprivate func isPointContainedWithinRighThreshold(point: CGPoint) -> Bool {
-		return point.x >= view.bounds.width - rightThreshold
-	}
-	
-	/**
+    fileprivate func isPointContainedWithinRighThreshold(point: CGPoint) -> Bool {
+        return point.x >= view.bounds.width - rightThreshold
+    }
+    
+    /**
      A method that determines whether the passed in point is
      contained within the bounds of the passed in container view.
      - Parameter container: A UIView that sets the bounds to test
@@ -956,27 +956,27 @@ open class NavigationDrawerController: RootController {
      - Returns: A Boolean of the result, true if yes, false
      otherwise.
      */
-	fileprivate func isPointContainedWithinView(container: UIView, point: CGPoint) -> Bool {
-		return container.bounds.contains(point)
-	}
-	
-	/**
+    fileprivate func isPointContainedWithinView(container: UIView, point: CGPoint) -> Bool {
+        return container.bounds.contains(point)
+    }
+    
+    /**
      A method that shows a view.
      - Parameter container: A container view.
      */
-	fileprivate func showView(container: UIView) {
-		container.depthPreset = depthPreset
-		container.isHidden = false
-	}
-	
-	/**
+    fileprivate func showView(container: UIView) {
+        container.depthPreset = depthPreset
+        container.isHidden = false
+    }
+    
+    /**
      A method that hides a view.
      - Parameter container: A container view.
      */
-	fileprivate func hideView(container: UIView) {
-		container.depthPreset = .none
-		container.isHidden = true
-	}
+    fileprivate func hideView(container: UIView) {
+        container.depthPreset = .none
+        container.isHidden = true
+    }
 }
 
 extension NavigationDrawerController {

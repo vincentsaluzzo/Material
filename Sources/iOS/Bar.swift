@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -38,7 +38,7 @@ public enum ContentViewAlignment: Int {
 
 open class Bar: View {
     /// Will layout the view.
-    open var willLayout: Bool {
+    @objc open var willLayout: Bool {
         return 0 < width && 0 < height && nil != superview && !grid.deferred
     }
     
@@ -47,14 +47,14 @@ open class Bar: View {
     }
     
     /// Should center the contentView.
-    open var contentViewAlignment = ContentViewAlignment.full {
+    @objc open var contentViewAlignment = ContentViewAlignment.full {
         didSet {
             layoutSubviews()
         }
     }
     
     /// A preset wrapper around contentEdgeInsets.
-    open var contentEdgeInsetsPreset: EdgeInsetsPreset {
+    @objc open var contentEdgeInsetsPreset: EdgeInsetsPreset {
         get {
             return grid.contentEdgeInsetsPreset
         }
@@ -75,7 +75,7 @@ open class Bar: View {
     }
     
     /// A preset wrapper around interimSpace.
-    open var interimSpacePreset: InterimSpacePreset {
+    @objc open var interimSpacePreset: InterimSpacePreset {
         get {
             return grid.interimSpacePreset
         }
@@ -105,10 +105,10 @@ open class Bar: View {
     }
     
     /// ContentView that holds the any desired subviews.
-    open let contentView = UIView()
+    @objc open let contentView = UIView()
     
     /// Left side UIViews.
-    open var leftViews: [UIView] {
+    @objc open var leftViews: [UIView] {
         didSet {
             for v in oldValue {
                 v.removeFromSuperview()
@@ -118,7 +118,7 @@ open class Bar: View {
     }
     
     /// Right side UIViews.
-    open var rightViews: [UIView] {
+    @objc open var rightViews: [UIView] {
         didSet {
             for v in oldValue {
                 v.removeFromSuperview()
@@ -128,7 +128,7 @@ open class Bar: View {
     }
     
     /// Center UIViews.
-    open var centerViews: [UIView] {
+    @objc open var centerViews: [UIView] {
         get {
             return contentView.grid.views
         }
@@ -170,7 +170,7 @@ open class Bar: View {
      - Parameter rightViews: An Array of UIViews that go on the right side.
      - Parameter centerViews: An Array of UIViews that go in the center.
      */
-    public convenience init(leftViews: [UIView]? = nil, rightViews: [UIView]? = nil, centerViews: [UIView]? = nil) {
+    @objc public convenience init(leftViews: [UIView]? = nil, rightViews: [UIView]? = nil, centerViews: [UIView]? = nil) {
         self.init()
         self.leftViews = leftViews ?? []
         self.rightViews = rightViews ?? []
@@ -182,7 +182,7 @@ open class Bar: View {
         layoutBarSubviews()
     }
     
-    open func layoutBarSubviews() {
+    @objc open func layoutBarSubviews() {
         guard willLayout else {
             return
         }

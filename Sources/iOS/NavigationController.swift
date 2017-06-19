@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,7 +32,7 @@ import UIKit
 
 extension NavigationController {
     /// Device status bar style.
-    open var statusBarStyle: UIStatusBarStyle {
+    @objc open var statusBarStyle: UIStatusBarStyle {
         get {
             return Application.statusBarStyle
         }
@@ -47,31 +47,31 @@ open class NavigationController: UINavigationController {
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-	
-	/**
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    /**
      An initializer that initializes the object with an Optional nib and bundle.
      - Parameter nibNameOrNil: An Optional String for the nib.
      - Parameter bundle: An Optional NSBundle where the nib is located.
      */
-	public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
-	
-	/**
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    /**
      An initializer that initializes the object with a rootViewController.
      - Parameter rootViewController: A UIViewController for the rootViewController.
      */
-	public override init(rootViewController: UIViewController) {
-		super.init(navigationBarClass: NavigationBar.self, toolbarClass: nil)
-		setViewControllers([rootViewController], animated: false)
-	}
-	
-	open override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		guard let v = interactivePopGestureRecognizer else {
+    public override init(rootViewController: UIViewController) {
+        super.init(navigationBarClass: NavigationBar.self, toolbarClass: nil)
+        setViewControllers([rootViewController], animated: false)
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let v = interactivePopGestureRecognizer else {
             return
         }
         
@@ -85,17 +85,17 @@ open class NavigationController: UINavigationController {
         
         if let r = x.rightPanGesture {
             r.require(toFail: v)
-		}
-	}
-	
-	open override func viewDidLoad() {
-		super.viewDidLoad()
-		prepare()
-	}
-	
-	open override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		guard let v = navigationBar as? NavigationBar else {
+        }
+    }
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        prepare()
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let v = navigationBar as? NavigationBar else {
             return
         }
         
@@ -104,7 +104,7 @@ open class NavigationController: UINavigationController {
         }
         
         v.layoutNavigationItem(item: item)
-	}
+    }
     
     open override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -112,27 +112,27 @@ open class NavigationController: UINavigationController {
         navigationBar.layoutIfNeeded()
     }
     
-	/**
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
+    @objc open func prepare() {
         navigationBar.heightPreset = .normal
         navigationBar.width = view.width
         
         view.clipsToBounds = true
-		view.backgroundColor = .white
+        view.backgroundColor = .white
         view.contentScaleFactor = Screen.scale
         
         // This ensures the panning gesture is available when going back between views.
-		if let v = interactivePopGestureRecognizer {
-			v.isEnabled = true
-			v.delegate = self
-		}
-	}
+        if let v = interactivePopGestureRecognizer {
+            v.isEnabled = true
+            v.delegate = self
+        }
+    }
 }
 
 extension NavigationController: UINavigationBarDelegate {

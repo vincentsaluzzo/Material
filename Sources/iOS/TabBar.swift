@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -32,8 +32,8 @@ import UIKit
 
 @objc(TabBarLineAlignment)
 public enum TabBarLineAlignment: Int {
-	case top
-	case bottom
+    case top
+    case bottom
 }
 
 @objc(TabBarDelegate)
@@ -65,10 +65,10 @@ public enum TabBarStyle: Int {
 
 open class TabBar: Bar {
     /// A boolean indicating if the TabBar line is in an animation state.
-    open fileprivate(set) var isAnimating = false
+    @objc open fileprivate(set) var isAnimating = false
     
     /// Enables and disables bouncing when swiping.
-    open var isBounceEnabled: Bool {
+    @objc open var isBounceEnabled: Bool {
         get {
             return scrollView.bounces
         }
@@ -78,20 +78,20 @@ open class TabBar: Bar {
     }
     
     /// An enum that determines the tab bar style.
-    open var tabBarStyle = TabBarStyle.scrollable {
+    @objc open var tabBarStyle = TabBarStyle.scrollable {
         didSet {
             layoutSubviews()
         }
     }
     
     /// A reference to the scroll view when the tab bar style is scrollable.
-    open fileprivate(set) var scrollView: UIScrollView!
+    @objc open fileprivate(set) var scrollView: UIScrollView!
     
     /// A delegation reference.
-    open weak var delegate: TabBarDelegate?
+    @objc open weak var delegate: TabBarDelegate?
     
     /// The currently selected button.
-    open fileprivate(set) var selected: UIButton?
+    @objc open fileprivate(set) var selected: UIButton?
     
     /// A preset wrapper around contentEdgeInsets.
     open override var contentEdgeInsetsPreset: EdgeInsetsPreset {
@@ -135,16 +135,16 @@ open class TabBar: Bar {
         }
     }
     
-	/// Buttons.
-	open var buttons = [UIButton]() {
-		didSet {
-			for b in oldValue {
+    /// Buttons.
+    @objc open var buttons = [UIButton]() {
+        didSet {
+            for b in oldValue {
                 b.removeFromSuperview()
             }
-			
-			layoutSubviews()
-		}
-	}
+            
+            layoutSubviews()
+        }
+    }
     
     /// A boolean to animate the line when touched.
     @IBInspectable
@@ -161,10 +161,10 @@ open class TabBar: Bar {
     }
     
     /// A reference to the line UIView.
-    open let line = UIView()
+    @objc open let line = UIView()
     
     /// The line color.
-    open var lineColor: UIColor? {
+    @objc open var lineColor: UIColor? {
         get {
             return line.backgroundColor
         }
@@ -174,14 +174,14 @@ open class TabBar: Bar {
     }
     
     /// A value for the line alignment.
-    open var lineAlignment = TabBarLineAlignment.bottom {
+    @objc open var lineAlignment = TabBarLineAlignment.bottom {
         didSet {
             layoutSubviews()
         }
     }
     
     /// The line height.
-    open var lineHeight: CGFloat {
+    @objc open var lineHeight: CGFloat {
         get {
             return line.height
         }
@@ -297,7 +297,7 @@ open class TabBar: Bar {
         }
                 
         updateSelectionLine()
-	}
+    }
     
     private func updateSelectionLine() {
         for b in buttons {
@@ -318,7 +318,7 @@ open class TabBar: Bar {
         
         line.frame = CGRect(x: selected!.x, y: .bottom == lineAlignment ? height - lineHeight : 0, width: selected!.width, height: lineHeight)
     }
-	
+    
     /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
@@ -394,7 +394,7 @@ extension TabBar {
      - Parameter at index: An Int.
      - Paramater completion: An optional completion block.
      */
-    open func select(at index: Int, completion: ((UIButton) -> Void)? = nil) {
+    @objc open func select(at index: Int, completion: ((UIButton) -> Void)? = nil) {
         guard -1 < index, index < buttons.count else {
             return
         }
@@ -406,7 +406,7 @@ extension TabBar {
      - Parameter to button: A UIButton.
      - Parameter completion: An optional completion block.
      */
-    open func animate(to button: UIButton, completion: ((UIButton) -> Void)? = nil) {
+    @objc open func animate(to button: UIButton, completion: ((UIButton) -> Void)? = nil) {
         animate(to: button, isTriggeredByUserInteraction: false, completion: completion)
     }
     

@@ -5,16 +5,16 @@
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- *	*	Redistributions of source code must retain the above copyright notice, this
- *		list of conditions and the following disclaimer.
+ *    *    Redistributions of source code must retain the above copyright notice, this
+ *        list of conditions and the following disclaimer.
  *
- *	*	Redistributions in binary form must reproduce the above copyright notice,
- *		this list of conditions and the following disclaimer in the documentation
- *		and/or other materials provided with the distribution.
+ *    *    Redistributions in binary form must reproduce the above copyright notice,
+ *        this list of conditions and the following disclaimer in the documentation
+ *        and/or other materials provided with the distribution.
  *
- *	*	Neither the name of CosmicMind nor the names of its
- *		contributors may be used to endorse or promote products derived from
- *		this software without specific prior written permission.
+ *    *    Neither the name of CosmicMind nor the names of its
+ *        contributors may be used to endorse or promote products derived from
+ *        this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
@@ -38,18 +38,18 @@ open class TableViewCell: UITableViewCell, Pulseable, PulseableLayer {
      allows the dropshadow effect on the backing layer, while clipping
      the image to a desired shape within the visualLayer.
      */
-    open let visualLayer = CAShapeLayer()
+    @objc open let visualLayer = CAShapeLayer()
     
     /// A Pulse reference.
     internal var pulse: Pulse!
     
     /// A reference to the pulse layer.
-    internal var pulseLayer: CALayer? {
+    @objc internal var pulseLayer: CALayer? {
         return pulse.pulseLayer
     }
     
     /// PulseAnimation value.
-    open var pulseAnimation: PulseAnimation {
+    @objc open var pulseAnimation: PulseAnimation {
         get {
             return pulse.animation
         }
@@ -80,41 +80,41 @@ open class TableViewCell: UITableViewCell, Pulseable, PulseableLayer {
         }
     }
     
-	/// A property that accesses the backing layer's background
-	@IBInspectable
+    /// A property that accesses the backing layer's background
+    @IBInspectable
     open override var backgroundColor: UIColor? {
-		didSet {
-			layer.backgroundColor = backgroundColor?.cgColor
-		}
-	}
-	
-	/**
+        didSet {
+            layer.backgroundColor = backgroundColor?.cgColor
+        }
+    }
+    
+    /**
      An initializer that initializes the object with a NSCoder object.
      - Parameter aDecoder: A NSCoder instance.
      */
-	public required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-		prepare()
-	}
-	
-	/**
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        prepare()
+    }
+    
+    /**
      An initializer that initializes the object.
      - Parameter style: A UITableViewCellStyle enum.
      - Parameter reuseIdentifier: A String identifier.
      */
-	public override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
-		super.init(style: style, reuseIdentifier: reuseIdentifier)
-		prepare()
-	}
-	
-	open override func layoutSubviews() {
-		super.layoutSubviews()
+    public override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        prepare()
+    }
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
         layoutShape()
         layoutVisualLayer()
         layoutShadowPath()
         layoutDivider()
-	}
-	
+    }
+    
     /**
      Triggers the pulse animation.
      - Parameter point: A Optional point to pulse from, otherwise pulses
@@ -159,24 +159,24 @@ open class TableViewCell: UITableViewCell, Pulseable, PulseableLayer {
         super.touchesCancelled(touches, with: event)
         pulse.contract()
     }
-	
-	/**
+    
+    /**
      Prepares the view instance when intialized. When subclassing,
      it is recommended to override the prepare method
      to initialize property values and other setup operations.
      The super.prepare method should always be called immediately
      when subclassing.
      */
-	open func prepare() {
-		selectionStyle = .none
-		separatorInset = .zero
-		contentScaleFactor = Screen.scale
-		imageView?.isUserInteractionEnabled = false
-		textLabel?.isUserInteractionEnabled = false
-		detailTextLabel?.isUserInteractionEnabled = false
-		prepareVisualLayer()
+    @objc open func prepare() {
+        selectionStyle = .none
+        separatorInset = .zero
+        contentScaleFactor = Screen.scale
+        imageView?.isUserInteractionEnabled = false
+        textLabel?.isUserInteractionEnabled = false
+        detailTextLabel?.isUserInteractionEnabled = false
+        prepareVisualLayer()
         preparePulse()
-	}
+    }
 }
 
 extension TableViewCell {
